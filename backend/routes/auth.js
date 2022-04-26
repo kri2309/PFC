@@ -21,7 +21,7 @@ auth.route("/").post((req, res) => {
       if (ticket) {
         const payload = ticket.getPayload();
         checkLogin(payload.email, 10, false).then((userData) =>{
-        if(UserData){
+        if(userData){
           res.send({
             status: "200",
             name: payload.name,
