@@ -13,7 +13,6 @@ const selectFile = () => {
   }
 };
 
-
 const authenticateReq = async (token) => {
   const url = `https://kristinaborgolivier.me/auth?token=${token}`;
   const headers = {

@@ -1,9 +1,16 @@
 import Express from "express";
 import { OAuth2Client } from "google-auth-library";
+import { GetUser , CreateUser} from "../db";
 
 const CLIENT_ID = "924492803178-ga7q7qvqllu5ons0kn2iu7699a0udi0q.apps.googleusercontent.com";
 const auth = Express.Router();
 const client = new OAuth2Client(CLIENT_ID);
+
+export let UserInfo = {
+  Email: "",
+  Admin: false,
+  Credits: 0
+};
 
 export default auth;
 
@@ -13,15 +20,22 @@ auth.route("/").post((req, res) => {
     .then((ticket) => {
       if (ticket) {
         const payload = ticket.getPayload();
+        checkLogin(payload.email, 10, false).then((userData) =>{
+        if(UserData){
+          res.send({
+            status: "200",
+            name: payload.name,
+            credits: userData.credits,
+            admin: userData.admin,
+            email: payload.email,
+            picture: payload.picture,
+            token: token,
+            expiry: payload.exp,
+          });
+        }
+
+        } )
         
-        res.send({
-          status: "200",
-          name: payload.name,
-          email: payload.email,
-          picture: payload.picture,
-          token: token,
-          expiry: payload.exp,
-        });
         //console.log(`${payload.name} has logged in.`); 
       } else {
         res.send({ status: "401" });
@@ -32,6 +46,19 @@ auth.route("/").post((req, res) => {
     });;
 });
 
+async function checkLogin(email,credits,admin){
+let data = await GetUser(email)
+if (data === undefined){
+  CreateUser(email,credits,admin);
+  data = await GetUser(email)
+}
+else{
+  UserInfo.Email = data.email;
+  UserInfo.Credits = data.credits;
+  UserInfo.Admin = data.admin;
+}
+return data;
+}
 
 export const validateToken = async (token) => {
   return await client.verifyIdToken({
