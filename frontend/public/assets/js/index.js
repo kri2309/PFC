@@ -8,7 +8,7 @@ let user_name = "";
 const selectFile = () => {
   if (user_name) {
     uploadFile()
-  } else if(user_name == null) {
+  } else if(user_name == "") {
     alert("Error: You need to login first!");
   }
 };
