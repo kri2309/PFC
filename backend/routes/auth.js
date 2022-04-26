@@ -11,6 +11,9 @@ export let UserInfo = {
   Admin: false,
   Credits: 0
 };
+exports.getCredits = function(){
+  return UserInfo;
+}
 
 export default auth;
 
