@@ -136,7 +136,6 @@ async function loadGoogleLogin() {
 }
 
 async function getcredits(){
-  console.log("oogbabagbobgaobgoabogabogboagbogbaobgoba");
   const email = await authenticateReq(googleUser.getAuthResponse().id_token);
   console.log(email);
 
