@@ -1,6 +1,6 @@
 import Express from "express";
 import { OAuth2Client } from "google-auth-library";
-import { GetUser , CreateUser} from "../db";
+import { GetUser , CreateUser} from "../db.js";
 
 const CLIENT_ID = "924492803178-ga7q7qvqllu5ons0kn2iu7699a0udi0q.apps.googleusercontent.com";
 const auth = Express.Router();
