@@ -12,9 +12,22 @@ const __dirname = dirname(__filename);
 const payments = Express.Router();
 
 payments.route("/").get((req,res) => {
-    const token = req.query;
+   
+    const token = req.query.token;
 
+    validateToken(token)
+    .then((ticket) => {
+        if (ticket.getPayload().name !=null){
+            res.sendFile(path.join(__dirname, "../../frontend/payments.html"));
+
+        } else{
+            res.redirect("/");
+        }
+    }).catch((error) => {
+        console.log("Token expired");
         res.redirect("/");
+   
+    });
    
 });
 
