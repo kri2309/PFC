@@ -31,10 +31,16 @@ const UploadCloud = async (folder, file) => {
   });
 };
 
+const callback = (err , messageId)=>{
+  if(err){
+    console.log(err);
+  }
+}
+
 
 async function publishMessage(payload) {
   const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
-  pubsub.topic("queue").publish(dataBuffer, {}, callback);
+  pubsub.topic("queue-sub").publish(dataBuffer, {}, callback);
 }
 
 let imageUpload = multer({
