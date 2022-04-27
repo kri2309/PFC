@@ -14,17 +14,19 @@ const bucketname = "programmingforthecloud-340711.appspot.com";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const upload = Express.Router();
+
 const pubsub = new PubSub({
   projectId: "programmingforthecloud-340711",
   keyFilename: "./key.json",
 });
-const storage = new Storage.Storage({
+
+const storage = new Storage({
   projectId: "programmingforthecloud-340711",
   keyFilename: "./key.json",
 });
 
 const UploadCloud = async (folder, file) => {
-  return await storage.bucket(bucketname).upload(req.file.path, {
+  return await storage.bucket(bucketname).upload(file.path, {
     destination: folder + file.originalname,
   });
 };
