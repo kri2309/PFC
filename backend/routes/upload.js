@@ -2,7 +2,7 @@ import Express from "express";
 import multer from "multer";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
-import * as Storage from "@google-cloud/storage";
+import {Storage } from "@google-cloud/storage";
 import { PubSub } from "@google-cloud/pubsub";
 import fs from "fs";
 import { Base64 } from "js-base64";
