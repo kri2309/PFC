@@ -22,12 +22,10 @@ const authenticateReq = async (token) => {
   };
   const response = await axios.post(url, headers);
   const status = response.data.status;
-  const isAdmin = response.data.admin;
 
   if (status == 200) {
     user_name = response.data.name;
     const name = response.data.name;
-    const admin = response.data.admin;
     const email = response.data.email;
     const picture = response.data.picture;
     const expiry = response.data.expiry;
