@@ -4,7 +4,7 @@ let profile = document.getElementById("profile");
 let signInContainer = document.getElementById("signInContainer");
 let credits = document.getElementById("credits");
 let user_name = "";
-let adminPanel = document.getElementById("admin-container").innerHTML;
+let adminPanel = document.getElementById("admin-container");
 
 const selectFile = () => {
   if (user_name) {
@@ -76,7 +76,7 @@ async function loadGoogleLogin() {
     auth2
       .signOut()
       .then(() => {
-        adminPanel = " ";
+        adminPanel.style.display = "none";
         document.getElementById("payments-container").innerHTML = " ";
         profile.style.display = "none";
         signInContainer.style.display = "inline";
@@ -118,9 +118,7 @@ async function loadGoogleLogin() {
           adminPanel = document.getElementById("admin-container").innerHTML;
           if (response.data.admin == true) {
             console.log(response.data.admin);
-            document.getElementById(
-              "admin-container"
-            ).innerHTML = `<a class="nav-link active" aria-current="page" href="/admin?token=${token}">Admin Panel</a>`;
+            adminPanel.style.display = "inline";
           } 
         }
       },
