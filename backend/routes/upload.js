@@ -66,6 +66,8 @@ let imageUpload = multer({
 
 
 upload.route("/").post(imageUpload.single("image"),async function (req, res){
+  console.log(req.file);
+
   if (req.file) {
     console.log("File downloaded at: " + req.file.path);
 
