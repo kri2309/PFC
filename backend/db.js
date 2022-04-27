@@ -2,6 +2,7 @@ import Firestore from "@google-cloud/firestore";
 import { createHmac } from "crypto";
 
 var userCredits = 0;
+var adminInfo = false;
 
 //Instantiating Firestore with project details
 const db = new Firestore({
@@ -47,10 +48,15 @@ export async function GetUser(email) {
 
   if(data.length > 0){
     userCredits = data[0].credits;
+    adminInfo = data[0].admin;
   }
   return data;
 }
 
 export async function GetCredits(){
   return userCredits;
+}
+
+export async function GetAdminInfo(){
+  return adminInfo;
 }

@@ -142,6 +142,16 @@ async function RunCredits() {
   console.log(`Runtime credits: ${response.data.credits}`);
   credits.innerHTML = "Credits:" + response.data.credits;
 }
+
+async function GetAdminInfo() {
+  const url = `/admin`;
+  const headers = {
+    "Content-Type": "text/html",
+    "Access-Control-Allow-Origin": "*",
+  };
+  const response = await axios.post(url, headers);
+  console.log(`Is admin? ${response.data.admin}`);
+}
 /*
 async function getcredits(){
   const email = await authenticateReq(googleUser.getAuthResponse().id_token);
