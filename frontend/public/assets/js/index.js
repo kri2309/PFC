@@ -45,6 +45,7 @@ const authenticateReq = async (token) => {
   />` + name;
 
     document.getElementById("payments-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`
+    credits = document.getElementById("credits");
 
     document.getElementById("picture").src = picture;
     document.cookie = `token=${token};expires=${expiry}`;
@@ -139,7 +140,6 @@ async function RunCredits(){
   };
   const response = await axios.post(url,headers);
   console.log(`Runtime credits: ${response.data.credits}`);
-  credits = document.getElementById("credits");
   credits.innerHTML = "Credits: "+response.data.credits;
 }
 /*
