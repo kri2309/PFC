@@ -66,7 +66,7 @@ let imageUpload = multer({
 
 
 upload.route("/").post(imageUpload.single("image"), (req, res) => {
-  console.log(req);
+  console.log(req.data + req.file);
   const token = req.headers.cookie.split("token=")[1].split(";")[0];
   validateToken(token).then((r) => {
     console.log("Hi");
