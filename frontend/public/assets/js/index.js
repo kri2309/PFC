@@ -151,9 +151,13 @@ async function GetAdminInfo() {
   };
   const response = await axios.post(url, headers);
   console.log(response.data.admin);
+  adminPanel = document.getElementById("admin-container");
   if (response.data.admin == true) {
     adminPanel.style.display = "inline";
-  } 
+  } else{
+    adminPanel.style.display = none;
+    console.log(response.data.admin);
+  }
 }
 /*
 async function getcredits(){
