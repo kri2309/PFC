@@ -54,8 +54,9 @@ const authenticateReq = async (token) => {
     console.log(`${name} signed in successfully.`);
 
     return email;
-  } if(response.data.admin){
-  }else {
+  }
+  if (response.data.admin) {
+  } else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
     return null;
@@ -120,7 +121,7 @@ async function loadGoogleLogin() {
           if (response.data.admin == true) {
             console.log(response.data.admin);
             adminPanel.style.display = "inline";
-          } 
+          }
         }
       },
       function (error) {
@@ -154,29 +155,24 @@ async function GetAdminInfo() {
   adminPanel = document.getElementById("admin-container");
   if (Boolean(response.data.admin) == true) {
     adminPanel.style.display = "inline";
-  } else{
+  } else {
     adminPanel.style.display = "none";
     console.log(response.data.admin);
   }
 }
 async function Add10Credits() {
-  const email = await authenticateReq(
-    googleUser.getAuthResponse().id_token
-  );
-  if (email != null) {
-    const url = "/login?email=" + email;
-    const headers = {
-      "Content-Type": "text/html",
-      "Access-Control-Allow-Origin": "*",
-    };
-    const response = await axios.post(url, headers);
-    response.data.credits =  response.data.credits + 10;
-  }
+  const url = `/credits`;
+  const headers = {
+    "Content-Type": "text/html",
+    "Access-Control-Allow-Origin": "*",
+  };
+  const response = await axios.post(url, headers);
+  console.log(`Runtime credits: ${response.data.credits}`);
+  response.data.credits = response.data.credits + 10;
+  console.log(`Updated credits: ${response.data.credits}`);
 }
-async function Add20Credits() {
-}
-async function Add30Credits() {
-}
+async function Add20Credits() {}
+async function Add30Credits() {}
 /*
 async function getcredits(){
   const email = await authenticateReq(googleUser.getAuthResponse().id_token);
