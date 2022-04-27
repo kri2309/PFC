@@ -7,7 +7,7 @@ import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
 import { GetUser, CreateUser, GetCredits} from "./db.js";
 import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
-import home from "./routes/home.js";
+import admin from "./routes/admin.js";
 import payments from "./routes/payments.js";
 
 const DEV = false;
@@ -77,7 +77,7 @@ app.use("/auth", auth);
 //route upload traffic to upload.js
 app.use("/upload", upload);
 
-app.use("/home", home);
+app.use("/admin", admin);
 
 app.use("/payments", payments);
 

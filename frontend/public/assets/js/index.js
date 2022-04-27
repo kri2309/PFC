@@ -121,7 +121,7 @@ async function loadGoogleLogin() {
           }
           console.log(response.data.admin);
           if (response.data.admin) {
-            adminPanel = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Admin Panel</a>`;
+            adminPanel = `<a class="nav-link active" aria-current="page" href="/admin?token=${token}">Admin Panel</a>`;
           } else {
             //adminPanel = " ";
           }

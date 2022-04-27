@@ -9,11 +9,11 @@ import { validateToken } from "./auth.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const home = Express.Router();
+const admin = Express.Router();
 
-home.route("/").get((req,res) => {
- res.sendFile(path.join(__dirname, "../../frontend/home.html"));
+admin.route("/").get((req,res) => {
+ res.sendFile(path.join(__dirname, "../../frontend/admin.html"));
 
 });
 
-export default home;
+export default admin;
