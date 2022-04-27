@@ -88,7 +88,7 @@ app.get("/", (req, res) => {
 
 app.post("/credits", (req, res) => {
   GetCredits().then((methodResult)=>{
-    res.sendFile({result: "CreditsAcquired", reason: "Credits here!", credits: methodResult});
+    res.sendFile({result: "CreditsAcquired", reason: "Credits here!", credits: JSON.stringify(methodResult)});
   });
 });
 
