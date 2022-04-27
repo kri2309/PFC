@@ -4,6 +4,7 @@ let profile = document.getElementById("profile");
 let signInContainer = document.getElementById("signInContainer");
 let credits = document.getElementById("credits");
 let user_name = "";
+let adminPanel = document.getElementById("home-container").innerHTML;
 
 const selectFile = () => {
   if (user_name) {
@@ -44,7 +45,7 @@ const authenticateReq = async (token) => {
     loading="lazy"
   />` + name;
 
-    let adminPanel = document.getElementById("home-container").innerHTML;
+    
     document.getElementById("payments-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`
     credits = document.getElementById("credits");
 
