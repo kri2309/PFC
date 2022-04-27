@@ -102,6 +102,8 @@ async function loadGoogleLogin() {
       signInButton,
       {},
       async function (googleUser) {
+        adminPanel = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Admin Panel</a>`;
+
         console.log("hell0");
         const email = await authenticateReq(googleUser.getAuthResponse().id_token);
         console.log(email);
@@ -122,7 +124,7 @@ async function loadGoogleLogin() {
         if (response.data.admin){
           adminPanel = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Admin Panel</a>`;
         }else{
-            adminPanel = " ";
+            //adminPanel = " ";
           }
         }
        },
