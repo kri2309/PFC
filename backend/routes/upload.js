@@ -14,6 +14,11 @@ const __dirname = dirname(__filename);
 const upload = Express.Router();
 const base64String = "";
 
+async function publishMessage(payload){
+const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
+pubsub.topic("queue").publish(dataBuffer, {}, callback);
+}
+
 let imageUpload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
@@ -48,7 +53,7 @@ upload.route("/").post(imageUpload.single("image"),async function (req, res){
     destination: "pending/" + req.file.originalname,
     });
 
-    pubsub.publishMessage({
+    publishMessage({
       email: email,
       filename: req.file.originalname,
       url: r.emtadata.mediaLink,
