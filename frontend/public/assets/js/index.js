@@ -150,6 +150,7 @@ async function GetAdminInfo() {
     "Access-Control-Allow-Origin": "*",
   };
   const response = await axios.post(url, headers);
+  console.log(response.data.admin);
   if (response.data.admin == true) {
     adminPanel.style.display = "inline";
   } 
