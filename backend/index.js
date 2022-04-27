@@ -74,8 +74,6 @@ app.use(cors());
 //route auth traffic to auth.js
 app.use("/auth", auth);
 
-app.use("/authcredits", auth.getCredits);
-
 //route upload traffic to upload.js
 app.use("/upload", upload);
 
