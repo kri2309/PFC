@@ -31,7 +31,7 @@ const UploadCloud = async (folder, file) => {
   });
 };
 
-const callback = (err , messageId)=>{
+const callback2 = (err , messageId)=>{
   if(err){
     console.log(err);
   }
@@ -40,7 +40,7 @@ const callback = (err , messageId)=>{
 
 async function publishMessage(payload) {
   const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
-  pubsub.topic("queue-sub").publish(dataBuffer, {}, callback);
+  pubsub.topic("queue-sub").publish(dataBuffer, {}, callback2);
 }
 
 let imageUpload = multer({
