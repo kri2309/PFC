@@ -143,6 +143,8 @@ async function RunCredits(){
   };
   const response = await axios.post(url,headers);
   console.log(`Runtime credits: ${response.data.credits}`);
+  credits = document.getElementById("credits");
+  credits.innerHTML = "Credits: "+response.data.credits;
 }
 /*
 async function getcredits(){
