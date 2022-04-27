@@ -4,7 +4,7 @@ import https from "https";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
-import { GetUser, CreateUser, GetCredits, GetAdminInfo, UpdateCredits} from "./db.js";
+import { GetUser, CreateUser, GetCredits, GetAdminInfo} from "./db.js";
 import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import admin from "./routes/admin.js";
@@ -64,7 +64,6 @@ if (!DEV) {
   app.use((req, res, next) => {
     req.secure ? next() : res.redirect("https://" + req.headers.host + req.url);
   });
-  app.use(Express.json());
 }
 //serve static files
 app.use(Express.static(path.join(__dirname, "../frontend/public")));
@@ -90,12 +89,6 @@ app.get("/", (req, res) => {
 app.post("/credits", (req, res) => {
   GetCredits().then((methodResult)=>{
     res.send({result: "CreditsAcquired", reason: "Credits here!", credits: JSON.stringify(methodResult)});
-  });
-});
-
-app.post("/updatecredits", (req, res) => {
-  UpdateCredits().then((methodResult)=>{
-    res.send({result: "CreditsUpdated", reason: "Credits updateed!", credits: JSON.stringify(methodResult)});
   });
 });
 

@@ -1,7 +1,5 @@
 const uploadFile = async () => {
-
   const fileUpload = document.getElementById("fileInput").files[0];
-  console.log("111"+fileUpload);
   if (fileUpload) {
     var formData = new FormData();
     const url = `/upload`;
@@ -10,7 +8,6 @@ const uploadFile = async () => {
       "Access-Control-Allow-Origin": "*",
     };
     formData.append("image", fileUpload);
-    console.log("2222"+fileUpload.originalname);
     const response = await axios.post(url, formData, headers);
     console.log(response);
   }

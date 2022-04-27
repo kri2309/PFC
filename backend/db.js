@@ -38,17 +38,6 @@ export async function CreateUser(email) {
   });
 }
 
-export async function CreateConversion(email) {
-  const docRef = db.collection("conversions").doc();
-  return await docRef.set({
-    completed: "",
-    date: "",
-    email: email,
-    filename: "",
-    pending: ""
-  });
-}
-
 export async function GetUser(email) {
   const docRef = db.collection("userData");
   const snapshot = await docRef.where("email", "==", email).get();
@@ -71,11 +60,3 @@ export async function GetCredits(){
 export async function GetAdminInfo(){
   return adminInfo;
 }
-
-export async function UpdateCredits(email , number){
-  const snapshot = await docRef.where("email", "==", email).get();
-  const docRef = db.collection("userData");
-  const res = await docRef.update({credits: true});
-  
-}
-
