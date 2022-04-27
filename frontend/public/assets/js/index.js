@@ -53,7 +53,8 @@ const authenticateReq = async (token) => {
     
 
     return email;
-  } else {
+  } 
+  else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
     return null;
@@ -122,11 +123,7 @@ async function loadGoogleLogin() {
             console.log(response.data.admin);
             adminPanel = " ";
           }
-          if (response.data.result === "exists") {
-            console.log("Found email in database: " + email);
-          } else {
-            console.log("Account has been created for " + email);
-          }
+
          
         }
       },
