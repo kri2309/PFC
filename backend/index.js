@@ -86,7 +86,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
-app.get("/credits", (req, res) => {
+app.post("/credits", (req, res) => {
   GetCredits().then((methodResult)=>{
     res.sendFile({result: "CreditsAcquired", reason: "Credits here!", credits: methodResult});
   });
