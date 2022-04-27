@@ -23,6 +23,13 @@ const storage = new Storage.Storage({
   keyFilename: "./key.json",
 });
 
+const UploadCloud = async (folder, file) => {
+  return await storage.bucket(bucketname).upload(req.file.path, {
+    destination: folder + file.originalname,
+  });
+};
+
+
 async function publishMessage(payload) {
   const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
   pubsub.topic("queue").publish(dataBuffer, {}, callback);
@@ -49,11 +56,6 @@ let imageUpload = multer({
   },
 });
 
-const UploadCloud = async (folder, file) => {
-  return await storage.bucket(bucketname).upload(req.file.path, {
-    destination: "pending/" + req.file.originalname,
-  });
-};
 
 upload.route("/").post(imageUpload.single("image"), (req, res) => {
   const token = req.headers.cookie.split("token=")[1].split(";")[0];
