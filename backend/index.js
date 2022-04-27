@@ -4,7 +4,7 @@ import https from "https";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
-import { GetUser, CreateUser} from "./db.js";
+import { GetUser, CreateUser, GetCredits} from "./db.js";
 import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import home from "./routes/home.js";
@@ -87,6 +87,13 @@ app.use("/payments", payments);
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
+
+app.get("/credits", (req, res) => {
+  GetCredits().then((methodResult)=>{
+    res.sendFile({result: "CreditsAcquired", reason: "Credits here!", credits: methodResult});
+  });
+});
+
 
 app.post("/login",  async function(req, res) {
   const email = req.query.email;

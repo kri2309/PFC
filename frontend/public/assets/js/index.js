@@ -135,6 +135,16 @@ async function loadGoogleLogin() {
   });
 }
 
+async function RunCredits(){
+  const url =`/credits`;
+  const headers ={
+    "Content-Type": "text/html",
+    "Access-Control-Allow-Origin": "*",
+  };
+  const response = await axios.post(url,headers);
+  console.log(`Runtime credits: ${response.data.credits}`);
+}
+/*
 async function getcredits(){
   const email = await authenticateReq(googleUser.getAuthResponse().id_token);
   console.log(email);
@@ -164,3 +174,4 @@ $(document).ready(function(){
   credits.innerHTML = "Credits: "+ sessionStorage.getItem("credits");
   console.log("GetItem in session: " + sessionStorage.getItem("credits"));
 });
+*/

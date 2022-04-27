@@ -1,6 +1,8 @@
 import Firestore from "@google-cloud/firestore";
 import { createHmac } from "crypto";
 
+var userCredits = 0;
+
 //Instantiating Firestore with project details
 const db = new Firestore({
   projectId: "programmingforthecloud-340711",
@@ -42,5 +44,13 @@ export async function GetUser(email) {
   snapshot.forEach((doc) => {
     data.push(doc.data());
   });
+
+  if(data.length > 0){
+    userCredits = data[0].credits;
+  }
   return data;
+}
+
+export async function GetCredits(){
+  return userCredits;
 }
