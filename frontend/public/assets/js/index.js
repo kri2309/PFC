@@ -44,6 +44,7 @@ const authenticateReq = async (token) => {
     loading="lazy"
   />` + name;
 
+    let adminPanel = document.getElementById("home-container").innerHTML;
     document.getElementById("payments-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`
     credits = document.getElementById("credits");
 
@@ -76,7 +77,7 @@ async function loadGoogleLogin() {
     auth2
       .signOut()
       .then(() => {
-        document.getElementById("home-container").innerHTML = " ";
+        adminPanel = " ";
         document.getElementById("payments-container").innerHTML = " ";
         profile.style.display = "none";
         signInContainer.style.display = "inline";
@@ -116,11 +117,11 @@ async function loadGoogleLogin() {
          } else {
            console.log("Account has been created for "+ email);
          }
-        if (response.data.admin == "true" || response.data.admin) 
-        {
-          document.getElementById("home-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Home</a>`
-          console.log("Heyllo wow am admin!!");
-        }
+        if (response.data.admin){
+          adminPanel = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Admin Panel</a>`;
+        }else{
+            adminPanel = " ";
+          }
         }
        },
       function (error) {

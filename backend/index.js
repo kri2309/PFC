@@ -97,15 +97,14 @@ app.post("/login",  async function(req, res) {
   const email = req.query.email;
   console.log("recieved email getting user");
 
-  GetUser(email).then( async function(response){
+  GetUser(email).then( (response) => {
     if(response.length > 0){
       console.log("found user");
       res.send({ result: "exists", reason: "Found email", credits: response[0].credits, admin: response[0].admin});
 
-    }
-    else{
-      const r = await CreateUser(email);
-      res.send({ result: "created", reason: "Created email", credits:10, admin: false});
+    }else{
+      CreateUser(email);
+      res.send({ result: "created", reason: "Created email",credits: response[0].credits, admin: response[0].admin});
     }
   });
 });
