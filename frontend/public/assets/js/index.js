@@ -46,12 +46,11 @@ const authenticateReq = async (token) => {
   />` + name;
 
     document.getElementById("payments-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`;
-    credits = document.getElementById("credits");
 
     document.getElementById("picture").src = picture;
     document.cookie = `token=${token};expires=${expiry}`;
     console.log(`${name} signed in successfully.`);
-    console.log(`admin: ${admin}, isAdmin:${isAdmin}`);
+    
 
     return email;
   } else {
@@ -114,11 +113,6 @@ async function loadGoogleLogin() {
             "Access-Control-Allow-Origin": "*",
           };
           const response = await axios.post(url, headers);
-          if (response.data.result === "exists") {
-            console.log("Found email in database: " + email);
-          } else {
-            console.log("Account has been created for " + email);
-          }
           console.log(response.data.admin);
           adminPanel = document.getElementById("admin-container").innerHTML;
           if (response.data.admin == true) {
@@ -128,6 +122,12 @@ async function loadGoogleLogin() {
             console.log(response.data.admin);
             adminPanel = " ";
           }
+          if (response.data.result === "exists") {
+            console.log("Found email in database: " + email);
+          } else {
+            console.log("Account has been created for " + email);
+          }
+         
         }
       },
       function (error) {
