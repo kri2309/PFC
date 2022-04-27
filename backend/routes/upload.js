@@ -8,7 +8,7 @@ import fs from 'fs'
 import {Base64} from 'js-base64';
 import FormData from "form-data";
 import axios from "axios";
-import { validateToken } from "./auth";
+import { validateToken } from "./auth.js";
 const bucketname = "programmingforthecloud-340711.appspot.com";
 
 const __filename = fileURLToPath(import.meta.url);
