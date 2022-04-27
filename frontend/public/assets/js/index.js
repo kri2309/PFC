@@ -117,6 +117,7 @@ async function loadGoogleLogin() {
          } else {
            console.log("Account has been created for "+ email);
          }
+         console.log(response.data.admin);
         if (response.data.admin){
           adminPanel = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Admin Panel</a>`;
         }else{
