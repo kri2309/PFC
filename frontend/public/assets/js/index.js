@@ -152,7 +152,7 @@ async function GetAdminInfo() {
   const response = await axios.post(url, headers);
   console.log(response.data.admin);
   adminPanel = document.getElementById("admin-container");
-  if (response.data.admin == true) {
+  if (Boolean(response.data.admin) == true) {
     adminPanel.style.display = "inline";
   } else{
     adminPanel.style.display = "none";
