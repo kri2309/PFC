@@ -9,11 +9,13 @@ import {Base64} from 'js-base64';
 import FormData from "form-data";
 import axios from "axios";
 import { validateToken } from "./auth";
+const bucketname = "programmingforthecloud-340711.appspot.com";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const upload = Express.Router();
 const pubsub = new PubSub({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
+const storage = new Storage.Storage({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
 
 async function publishMessage(payload){
 const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
@@ -41,6 +43,11 @@ let imageUpload = multer({
   },
 });
 
+const UploadCloud = async(folder,file) => {
+  return  await storage.bucket(bucketname).upload(req.file.path, {
+    destination: "pending/" + req.file.originalname,
+    });
+};
 upload.route("/").post(imageUpload.single("image"), (req, res) =>{
   const token = req.headers.cookie.split("token=")[1].split(";")[0];
   validateToken(token)
@@ -50,19 +57,19 @@ upload.route("/").post(imageUpload.single("image"), (req, res) =>{
       console.log("File downloaded at: " + req.file.path);
   
       //Upload to google cloud
-      const storage = new Storage.Storage({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
-      const bucketname = "programmingforthecloud-340711.appspot.com";
   
-      await storage.bucket(bucketname).upload(req.file.path, {
-      destination: "pending/" + req.file.originalname,
-      });
+      UploadCloud("pending/", req.file).then(([r])=>{
+        console.log(r.metadata.mediaLink);
+        
+        publishMessage({
+          email: email,
+          filename: req.file.originalname,
+          url: r.emtadata.mediaLink,
+          date : new Date().toUTCString(),
+        });
+      })
   
-      publishMessage({
-        email: email,
-        filename: req.file.originalname,
-        url: r.emtadata.mediaLink,
-        date : new Date().toUTCString(),
-      });
+      
   
       //Convert to base64
       var base64file =  fs.readFileSync(req.file.path, 'base64');
