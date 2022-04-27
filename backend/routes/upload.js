@@ -72,6 +72,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
     const email = r.getPayload().email;
     if (req.file) {
       console.log("File downloaded at: " + req.file.path);
+      ``;
 
       //Upload to google cloud
 
