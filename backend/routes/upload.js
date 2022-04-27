@@ -12,7 +12,7 @@ import axios from "axios";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const upload = Express.Router();
-const base64String = "";
+const pubsub = new PubSub({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
 
 async function publishMessage(payload){
 const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
@@ -45,7 +45,6 @@ upload.route("/").post(imageUpload.single("image"),async function (req, res){
     console.log("File downloaded at: " + req.file.path);
 
     //Upload to google cloud
-    const pubsub = new PubSub({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
     const storage = new Storage.Storage({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
     const bucketname = "programmingforthecloud-340711.appspot.com";
 
