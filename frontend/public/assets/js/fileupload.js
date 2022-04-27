@@ -1,7 +1,7 @@
 const uploadFile = async () => {
 
   const fileUpload = document.getElementById("fileInput").files[0];
-  console.log(fileUpload);
+  console.log("111"+fileUpload);
   if (fileUpload) {
     var formData = new FormData();
     const url = `/upload`;
