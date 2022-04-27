@@ -120,6 +120,7 @@ async function loadGoogleLogin() {
             console.log("Account has been created for " + email);
           }
           console.log(response.data.admin);
+          adminPanel = document.getElementById("admin-container").innerHTML;
           if (response.data.admin == true) {
             console.log(response.data.admin);
             adminPanel = `<a class="nav-link active" aria-current="page" href="/admin?token=${token}">Admin Panel</a>`;
