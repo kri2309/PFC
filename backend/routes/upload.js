@@ -53,7 +53,7 @@ upload.route("/").post(imageUpload.single("image"),async function (req, res){
       destination: "pending/" + req.file.originalname,
       });
   
-      publishMessage({
+      pubsub.publishMessage({
         email: email,
         filename: req.file.originalname,
         url: r.emtadata.mediaLink,
