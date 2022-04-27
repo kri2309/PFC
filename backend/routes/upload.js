@@ -49,7 +49,7 @@ upload.route("/").post(imageUpload.single("image"),async function (req, res){
       const storage = new Storage.Storage({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
       const bucketname = "programmingforthecloud-340711.appspot.com";
   
-      await storage.bucket(bucketname).upload(req.file.path, {
+      storage.bucket(bucketname).upload(req.file.path, {
       destination: "pending/" + req.file.originalname,
       });
   
