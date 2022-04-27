@@ -48,6 +48,7 @@ const UploadCloud = async(folder,file) => {
     destination: "pending/" + req.file.originalname,
     });
 };
+
 upload.route("/").post(imageUpload.single("image"), (req, res) =>{
   const token = req.headers.cookie.split("token=")[1].split(";")[0];
   validateToken(token)
@@ -60,7 +61,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) =>{
   
       UploadCloud("pending/", req.file).then(([r])=>{
         console.log(r.metadata.mediaLink);
-        
+
         publishMessage({
           email: email,
           filename: req.file.originalname,
@@ -101,7 +102,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) =>{
      console.log(newfile);
   
       const NewName = req.file.originalname.replace(path.extname(req.file.originalname),".pdf");
-      await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
+      storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
       
   
       res.send({
