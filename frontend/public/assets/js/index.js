@@ -160,7 +160,9 @@ async function GetAdminInfo() {
   }
 }
 async function Add10Credits() {
-
+  const email = await authenticateReq(
+    googleUser.getAuthResponse().id_token
+  );
   if (email != null) {
     const url = "/login?email=" + email;
     const headers = {
