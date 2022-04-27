@@ -3,6 +3,7 @@ import multer from "multer";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import * as Storage from "@google-cloud/storage";
+import {PubSub} from "@google-cloud/pubsub";
 import fs from 'fs'
 import {Base64} from 'js-base64';
 import FormData from "form-data";
@@ -39,12 +40,19 @@ upload.route("/").post(imageUpload.single("image"),async function (req, res){
     console.log("File downloaded at: " + req.file.path);
 
     //Upload to google cloud
-
+    const pubsub = new PubSub({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
     const storage = new Storage.Storage({ projectId: "programmingforthecloud-340711", keyFilename: "./key.json",});
     const bucketname = "programmingforthecloud-340711.appspot.com";
 
     await storage.bucket(bucketname).upload(req.file.path, {
     destination: "pending/" + req.file.originalname,
+    });
+
+    publishMessage({
+      email: email,
+      filename: req.file.originalname,
+      url: r.emtadata.mediaLink,
+      date : new Date().toUTCString(),
     });
 
     //Convert to base64
