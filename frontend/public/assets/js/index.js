@@ -45,16 +45,16 @@ const authenticateReq = async (token) => {
     loading="lazy"
   />` + name;
 
-    document.getElementById("payments-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`;
+    document.getElementById(
+      "payments-container"
+    ).innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`;
 
     document.getElementById("picture").src = picture;
     document.cookie = `token=${token};expires=${expiry}`;
     console.log(`${name} signed in successfully.`);
-    
 
     return email;
-  } 
-  else {
+  } else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
     return null;
@@ -100,17 +100,8 @@ async function loadGoogleLogin() {
       signInButton,
       {},
       async function (googleUser) {
-
         console.log("hell0");
-        console.log(response.data.admin);
-          adminPanel = document.getElementById("admin-container").innerHTML;
-          if (response.data.admin == true) {
-            console.log(response.data.admin);
-            document.getElementById("admin-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/admin?token=${token}">Admin Panel</a>`;
-          } else {
-            console.log(response.data.admin);
-            adminPanel = " ";
-          }
+
         const email = await authenticateReq(
           googleUser.getAuthResponse().id_token
         );
@@ -127,13 +118,10 @@ async function loadGoogleLogin() {
           adminPanel = document.getElementById("admin-container").innerHTML;
           if (response.data.admin == true) {
             console.log(response.data.admin);
-            document.getElementById("admin-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/admin?token=${token}">Admin Panel</a>`;
-          } else {
-            console.log(response.data.admin);
-            adminPanel = " ";
-          }
-
-         
+            document.getElementById(
+              "admin-container"
+            ).innerHTML = `<a class="nav-link active" aria-current="page" href="/admin?token=${token}">Admin Panel</a>`;
+          } 
         }
       },
       function (error) {
