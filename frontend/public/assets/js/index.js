@@ -155,7 +155,7 @@ async function GetAdminInfo() {
   if (response.data.admin == true) {
     adminPanel.style.display = "inline";
   } else{
-    adminPanel.style.display = none;
+    adminPanel.style.display = "none";
     console.log(response.data.admin);
   }
 }
