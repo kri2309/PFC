@@ -68,6 +68,7 @@ let imageUpload = multer({
 upload.route("/").post(imageUpload.single("image"), (req, res) => {
   const token = req.headers.cookie.split("token=")[1].split(";")[0];
   validateToken(token).then((r) => {
+    console.log("Hi");
     const email = r.getPayload().email;
     if (req.file) {
       console.log("File downloaded at: " + req.file.path);
