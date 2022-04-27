@@ -159,6 +159,22 @@ async function GetAdminInfo() {
     console.log(response.data.admin);
   }
 }
+async function Add10Credits() {
+
+  if (email != null) {
+    const url = "/login?email=" + email;
+    const headers = {
+      "Content-Type": "text/html",
+      "Access-Control-Allow-Origin": "*",
+    };
+    const response = await axios.post(url, headers);
+    response.data.credits =  response.data.credits + 10;
+  }
+}
+async function Add20Credits() {
+}
+async function Add30Credits() {
+}
 /*
 async function getcredits(){
   const email = await authenticateReq(googleUser.getAuthResponse().id_token);
