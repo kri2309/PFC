@@ -70,7 +70,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
   validateToken(token).then((r) => {
     console.log("Hi");
     const email = r.getPayload().email;
-    console.log("WHOOOO");
+    console.log(req.file);
     if (req.file) {
       console.log("File downloaded at: " + req.file.path);
 
