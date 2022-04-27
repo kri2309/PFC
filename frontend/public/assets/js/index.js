@@ -54,7 +54,8 @@ const authenticateReq = async (token) => {
     console.log(`${name} signed in successfully.`);
 
     return email;
-  } else {
+  } if(response.data.admin){
+  }else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
     return null;
@@ -115,7 +116,7 @@ async function loadGoogleLogin() {
           };
           const response = await axios.post(url, headers);
           console.log(response.data.admin);
-          adminPanel = document.getElementById("admin-container").innerHTML;
+          adminPanel = document.getElementById("admin-container");
           if (response.data.admin == true) {
             console.log(response.data.admin);
             adminPanel.style.display = "inline";

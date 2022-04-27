@@ -11,11 +11,11 @@ export let UserInfo = {
   Admin: false,
   Credits: 0
 };
-/*
-exports.getCredits = function(){
+
+export function getUserInfo(){
   return UserInfo;
 }
-*/
+
 export default auth;
 
 auth.route("/").post((req, res) => {
