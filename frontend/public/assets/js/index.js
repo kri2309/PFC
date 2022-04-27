@@ -4,12 +4,12 @@ let profile = document.getElementById("profile");
 let signInContainer = document.getElementById("signInContainer");
 let credits = document.getElementById("credits");
 let user_name = "";
-let adminPanel = document.getElementById("home-container").innerHTML;
+let adminPanel = document.getElementById("admin-container").innerHTML;
 
 const selectFile = () => {
   if (user_name) {
-    uploadFile()
-  } else{
+    uploadFile();
+  } else {
     alert("Error: You need to login first!");
   }
 };
@@ -22,9 +22,9 @@ const authenticateReq = async (token) => {
   };
   const response = await axios.post(url, headers);
   const status = response.data.status;
-  const isAdmin =  response.data.admin;
+  const isAdmin = response.data.admin;
 
-  if (status == 200 ) {
+  if (status == 200) {
     user_name = response.data.name;
     const name = response.data.name;
     const admin = response.data.admin;
@@ -45,18 +45,16 @@ const authenticateReq = async (token) => {
     loading="lazy"
   />` + name;
 
-    
-    document.getElementById("payments-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`
+    document.getElementById("payments-container").innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`;
     credits = document.getElementById("credits");
 
     document.getElementById("picture").src = picture;
     document.cookie = `token=${token};expires=${expiry}`;
     console.log(`${name} signed in successfully.`);
     console.log(`admin: ${admin}, isAdmin:${isAdmin}`);
-    
+
     return email;
-  } 
-  else {
+  } else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
     return null;
@@ -102,32 +100,33 @@ async function loadGoogleLogin() {
       signInButton,
       {},
       async function (googleUser) {
-        adminPanel = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Admin Panel</a>`;
 
         console.log("hell0");
-        const email = await authenticateReq(googleUser.getAuthResponse().id_token);
+        const email = await authenticateReq(
+          googleUser.getAuthResponse().id_token
+        );
         console.log(email);
 
-        if(email != null){
-          const url = "/login?email="+email;
+        if (email != null) {
+          const url = "/login?email=" + email;
           const headers = {
-           "Content-Type": "text/html",
-           "Access-Control-Allow-Origin": "*",
-         };
-         const response = await axios.post(url,headers);
-         if (response.data.result === "exists") {
-           console.log("Found email in database: " + email);
-         } else {
-           console.log("Account has been created for "+ email);
-         }
-         console.log(response.data.admin);
-        if (response.data.admin){
-          adminPanel = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Admin Panel</a>`;
-        }else{
+            "Content-Type": "text/html",
+            "Access-Control-Allow-Origin": "*",
+          };
+          const response = await axios.post(url, headers);
+          if (response.data.result === "exists") {
+            console.log("Found email in database: " + email);
+          } else {
+            console.log("Account has been created for " + email);
+          }
+          console.log(response.data.admin);
+          if (response.data.admin) {
+            adminPanel = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Admin Panel</a>`;
+          } else {
             //adminPanel = " ";
           }
         }
-       },
+      },
       function (error) {
         alert(
           "Error: " + JSON.parse(JSON.stringify(error, undefined, 2)).error
@@ -137,15 +136,15 @@ async function loadGoogleLogin() {
   });
 }
 
-async function RunCredits(){
-  const url =`/credits`;
-  const headers ={
+async function RunCredits() {
+  const url = `/credits`;
+  const headers = {
     "Content-Type": "text/html",
     "Access-Control-Allow-Origin": "*",
   };
-  const response = await axios.post(url,headers);
+  const response = await axios.post(url, headers);
   console.log(`Runtime credits: ${response.data.credits}`);
-  credits.innerHTML = "Credits:" +response.data.credits;
+  credits.innerHTML = "Credits:" + response.data.credits;
 }
 /*
 async function getcredits(){
