@@ -10,6 +10,7 @@ const uploadFile = async () => {
       "Access-Control-Allow-Origin": "*",
     };
     formData.append("image", fileUpload);
+    console.log("2222"+fileUpload.originalname);
     const response = await axios.post(url, formData, headers);
     console.log(response);
   }
