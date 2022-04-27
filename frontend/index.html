@@ -91,6 +91,10 @@
           style="height: 80vh"
           
         >
+      <h1 class="special">Programming for the Cloud</h1>
+        <div class="body-text">
+          Doc & JPG to PDF Conversions
+        </div>
           <div class="col-auto justify-content-center">
             <input 
               id="fileInput"
@@ -116,13 +120,12 @@
       </div>
     </section>
   </body>
-  <footer  class="bg-dark text-white-50" style="height: 10vh">
-    <div class="text-center p-3 " style="color: white">
-      © 2022 Copyright: MSD6.3B
-    </div>
-    <!-- Copyright -->
-  </footer>
-
+ <!-- Footer -->
+ <footer  class="bg-dark text-white-50" style="height: 10vh">
+  <div class="text-center p-3 " style="color: white">
+   <b>Kristina Borg Olivier</b> Programming for the Cloud Assignment MSD6.3B
+  </div>
+</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -170,6 +173,89 @@
       .bold {
           font-weight: bold
       }
+      .body-text {
+	 font-size: 18px;
+	 font-family: Roboto;
+	 line-height: 1.5em;
+	 letter-spacing: 2px;
+	 font-weight: 300;
+	 font-style: normal;
+	 text-align: center;
+	 color: #4e6073;
+	 padding: 40px;
+}
+ h1 {
+	 font-size: 48px;
+	 font-family: Roboto;
+	 line-height: 1.5em;
+	 letter-spacing: 6px;
+	 font-weight: 900;
+	 font-style: normal;
+	 text-align: center;
+	 color: #4e6073;
+	 position: relative;
+}
+ h1.special {
+	 position: relative;
+	 margin-bottom: 2rem;
+	 margin-top: 2rem;
+}
+ h1.special:before {
+	 display: block;
+	 content: '';
+	 width: 12px;
+	 height: 12px;
+	 background-color: #DFCEB9;
+	 position: relative;
+	 transform: rotate(45deg) translateX(-50%);
+	 left: 50%;
+	 top: 10px;
+}
+ h1.special:after {
+	 content: '';
+	 position: absolute;
+	 left: 50%;
+	 transform: translateX(-50%);
+	 width: 100%;
+	 max-width: 780px;
+	 height: 3px;
+	 background: linear-gradient(to right,#DFCEB9 0%,#DFCEB9 45%,rgba(0,0,0,0) 45%,rgba(0,0,0,0) 55%,#DFCEB9 55%,#DFCEB9 100%);
+}
+ h1.special:before, h1.special:after {
+	 position: absolute;
+	 top: 100%;
+}
+ .line {
+	 position: relative;
+	 margin-bottom: 2rem;
+	 margin-top: 2rem;
+}
+ .line:before {
+	 display: block;
+	 content: '';
+	 width: 12px;
+	 height: 12px;
+	 background-color: #DFCEB9;
+	 position: relative;
+	 transform: rotate(45deg) translateX(-50%);
+	 left: 50%;
+	 top: 10px;
+}
+ .line:after {
+	 content: '';
+	 position: absolute;
+	 left: 50%;
+	 transform: translateX(-50%);
+	 width: 100%;
+	 max-width: 780px;
+	 height: 3px;
+	 background: linear-gradient(to right,#DFCEB9 0%,#DFCEB9 45%,rgba(0,0,0,0) 45%,rgba(0,0,0,0) 55%,#DFCEB9 55%,#DFCEB9 100%);
+}
+ body {
+	 max-width: 780px;
+	 margin: 0 auto;
+}
+ 
       
       </style>
       
