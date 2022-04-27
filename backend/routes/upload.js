@@ -65,15 +65,9 @@ let imageUpload = multer({
 });
 
 
-upload.route("/").post(imageUpload.single("image"),async function (req, res)  {
-  console.log(req.data + req.file);
-  const token = req.headers.cookie.split("token=")[1].split(";")[0];
-  validateToken(token).then((r) => {
-    console.log("Hi");
-    const email = r.getPayload().email;
-    console.log(req.file);
-    if (req.file) {
-      console.log("File downloaded at: " + req.file.path);
+upload.route("/").post(imageUpload.single("image"),async function (req, res){
+  if (req.file) {
+    console.log("File downloaded at: " + req.file.path);
 
       //Upload to google cloud
 
@@ -131,6 +125,5 @@ upload.route("/").post(imageUpload.single("image"),async function (req, res)  {
       });
     }
   });
-});
 
 export default upload;
