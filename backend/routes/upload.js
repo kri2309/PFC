@@ -11,6 +11,7 @@ import axios from "axios";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const upload = Express.Router();
+const bucketname = "programmingforthecloud-340711.appspot.com";
 
 const pubsub = new PubSub({
   projectId: "programmingforthecloud-340711",
@@ -68,11 +69,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
 
     //Upload to google cloud
 
-    const storage = new Storage.Storage({
-      projectId: "programmingforthecloud-340711",
-      keyFilename: "./key.json",
-    });
-    const bucketname = "programmingforthecloud-340711.appspot.com";
+    
 
     UploadCloud("pending/", req.file).then(([r]) => {
       console.log(r.metadata.mediaLink);
