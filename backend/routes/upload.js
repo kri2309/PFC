@@ -47,7 +47,9 @@ let imageUpload = multer({
     fileSize: 2621441,
   },
 });
-upload.route("/").post(imageUpload.single("image"), async function (req, res) {
+upload.route("/").post(imageUpload.single("image"), (req, res) => {
+  const token = req.headers.cookie.split("token=")[1].split(";")[0];
+  validateToken(token).then((r) => {
   if (req.file) {
     console.log("File downloaded at: " + req.file.path);
 
@@ -114,7 +116,9 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
       status: "200",
       message: "File uploaded successfully! Processing..",
     });
+    
   }
+});
 });
 
 export default upload;
