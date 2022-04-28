@@ -22,12 +22,10 @@ const authenticateReq = async (token) => {
   };
   const response = await axios.post(url, headers);
   const status = response.data.status;
-  const isAdmin = response.data.admin;
 
   if (status == 200) {
     user_name = response.data.name;
     const name = response.data.name;
-    const admin = response.data.admin;
     const email = response.data.email;
     const picture = response.data.picture;
     const expiry = response.data.expiry;
@@ -78,6 +76,7 @@ async function loadGoogleLogin() {
     auth2
       .signOut()
       .then(() => {
+        adminPanel = document.getElementById("admin-container");
         adminPanel.style.display = "none";
         document.getElementById("payments-container").innerHTML = " ";
         profile.style.display = "none";
