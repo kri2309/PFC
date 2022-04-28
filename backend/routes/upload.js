@@ -34,7 +34,7 @@ const UploadPDF = async (folder, file) => {
     ".pdf"
   );*/
   return await storage.bucket(bucketname).file({
-    destination: folder + file.originalname,
+    destination: folder + "NewName.pdf",
   }).save(file)
 };
 
