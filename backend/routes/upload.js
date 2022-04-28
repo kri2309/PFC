@@ -123,7 +123,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
 
     const uploadpath = `/uploads`;
 
-    const newfile = fs.writeFileSync(req.file.originalname,response_64, {encoding: "base64"},{function(err)});
+    const newfile = new Buffer.from(response_64, "base64");
     console.log(newfile);
 
     const NewName = req.file.originalname.replace(
