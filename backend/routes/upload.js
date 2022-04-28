@@ -2,7 +2,7 @@ import Express from "express";
 import multer from "multer";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
-import * as Storage from "@google-cloud/storage";
+import {Storage } from "@google-cloud/storage";
 import { PubSub } from "@google-cloud/pubsub";
 import fs from "fs";
 import axios from "axios";
@@ -15,6 +15,17 @@ const pubsub = new PubSub({
   projectId: "programmingforthecloud-340711",
   keyFilename: "./key.json",
 });
+
+const storage = new Storage({
+  projectId: "programmingforthecloud-340711",
+  keyFilename: "./key.json",
+});
+
+const UploadCloud = async (folder, file) => {
+  return await storage.bucket(bucketname).upload(file.path, {
+    destination: folder + file.originalname,
+  });
+};
 
 const callback2 = (err , messageId)=>{
   if(err){
@@ -62,14 +73,15 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
     });
     const bucketname = "programmingforthecloud-340711.appspot.com";
 
-    await storage.bucket(bucketname).upload(req.file.path, {
-      destination: "pending/" + req.file.originalname,
-    });
-    publishMessage({
-      email: email,
-      filename: req.file.originalname,
-      url: r.emtadata.mediaLink,
-      date: new Date().toUTCString(),
+    UploadCloud("pending/", req.file).then(([r]) => {
+      console.log(r.metadata.mediaLink);
+
+      publishMessage({
+        email: email,
+        filename: req.file.originalname,
+        url: r.emtadata.mediaLink,
+        date: new Date().toUTCString(),
+      });
     });
 
     //Convert to base64
@@ -111,7 +123,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
       path.extname(req.file.originalname),
       ".pdf"
     );
-    await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
+    //await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
 
     res.send({
       status: "200",
