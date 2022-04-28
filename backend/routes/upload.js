@@ -3,12 +3,29 @@ import multer from "multer";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import * as Storage from "@google-cloud/storage";
+import { PubSub } from "@google-cloud/pubsub";
 import fs from "fs";
 import axios from "axios";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const upload = Express.Router();
+
+const pubsub = new PubSub({
+  projectId: "programmingforthecloud-340711",
+  keyFilename: "./key.json",
+});
+
+const callback2 = (err , messageId)=>{
+  if(err){
+    console.log(err);
+  }
+}
+
+async function publishMessage(payload) {
+  const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
+  pubsub.topic("queue-sub").publish(dataBuffer, {}, callback2);
+}
 
 let imageUpload = multer({
   storage: multer.diskStorage({
@@ -44,6 +61,12 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
 
     await storage.bucket(bucketname).upload(req.file.path, {
       destination: "pending/" + req.file.originalname,
+    });
+    publishMessage({
+      email: email,
+      filename: req.file.originalname,
+      url: r.emtadata.mediaLink,
+      date: new Date().toUTCString(),
     });
 
     //Convert to base64
