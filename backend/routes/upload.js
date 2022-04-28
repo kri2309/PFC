@@ -5,6 +5,7 @@ import path, { dirname } from "path";
 import {Storage } from "@google-cloud/storage";
 import { PubSub } from "@google-cloud/pubsub";
 import fs from "fs";
+import { validateToken } from "./auth.js";
 import axios from "axios";
 
 const __filename = fileURLToPath(import.meta.url);
