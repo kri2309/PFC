@@ -29,12 +29,15 @@ const UploadCloud = async (folder, file) => {
   });
 };
 const UploadPDF = async (folder, file) => {
-  const NewName = file.originalname.replace(
+  /*const NewName = file.originalname.replace(
     path.extname(file.originalname),
     ".pdf"
-  );
+  );*/
   return await storage.bucket(bucketname).file({
-    destination: folder + NewName,
+    destination: folder + file.originalname.replace(
+      path.extname(file.originalname),
+      ".pdf"
+    ),
   }).save(file)
 };
 
@@ -126,6 +129,11 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
     const newfile = new Buffer.from(response_64, "base64");
     console.log(newfile);
 
+    const NewName = req.file.originalname.replace(
+      path.extname(req.file.originalname),
+      ".pdf"
+    );
+
     UploadPDF("completed/", newfile).then(([r]) => {
       console.log(r.metadata.mediaLink);
 
@@ -137,10 +145,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
       });
     });
 /*
-    const NewName = req.file.originalname.replace(
-      path.extname(req.file.originalname),
-      ".pdf"
-    );
+    
     //await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
 */
     res.send({
