@@ -77,7 +77,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
       publishMessage({
         email: email,
         filename: req.file.originalname,
-        url: r.emtadata.mediaLink,
+        url: r.metadata.mediaLink,
         date: new Date().toUTCString(),
       });
     });
