@@ -28,16 +28,17 @@ const UploadCloud = async (folder, file) => {
     destination: folder + file.originalname,
   });
 };
+/*
 const UploadPDF = async (folder, file) => {
   /*const NewName = file.originalname.replace(
     path.extname(file.originalname),
     ".pdf"
-  );*/
+  );
   return await storage.bucket(bucketname).file({
     destination: folder + "NewName.pdf",
   }).save(file)
 };
-
+*/
 //await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
 
 const callback2 = (err , messageId)=>{
@@ -130,21 +131,21 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
       path.extname(req.file.originalname),
       ".pdf"
     );
-
+/*
     UploadPDF("completed/", newfile).then(([r]) => {
       console.log(r.metadata.mediaLink);
 
+  
       publishMessage({
         email: email,
         filename: newfile,
-        url: r.metadata.mediaLink,
+        completed: r.metadata.mediaLink,
         date: new Date().toUTCString(),
       });
     });
-/*
-    
-    //await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
-*/
+  */
+  //await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
+
     res.send({
       status: "200",
       message: "File uploaded successfully! Processing..",
