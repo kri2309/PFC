@@ -28,6 +28,17 @@ const UploadCloud = async (folder, file) => {
     destination: folder + file.originalname,
   });
 };
+const UploadPDF = async (folder, file) => {
+  const NewName = file.originalname.replace(
+    path.extname(file.originalname),
+    ".pdf"
+  );
+  return await storage.bucket(bucketname).file({
+    destination: folder + NewName,
+  }).save(file)
+};
+
+//await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
 
 const callback2 = (err , messageId)=>{
   if(err){
@@ -68,8 +79,6 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
     console.log("File downloaded at: " + req.file.path);
 
     //Upload to google cloud
-
-    
 
     UploadCloud("pending/", req.file).then(([r]) => {
       console.log(r.metadata.mediaLink);
@@ -117,12 +126,23 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
     const newfile = new Buffer.from(response_64, "base64");
     console.log(newfile);
 
+    UploadPDF("completed/", newfile).then(([r]) => {
+      console.log(r.metadata.mediaLink);
+
+      publishMessage({
+        email: email,
+        filename: newfile,
+        url: r.metadata.mediaLink,
+        date: new Date().toUTCString(),
+      });
+    });
+/*
     const NewName = req.file.originalname.replace(
       path.extname(req.file.originalname),
       ".pdf"
     );
     //await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
-
+*/
     res.send({
       status: "200",
       message: "File uploaded successfully! Processing..",
