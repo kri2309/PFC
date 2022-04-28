@@ -34,10 +34,7 @@ const UploadPDF = async (folder, file) => {
     ".pdf"
   );*/
   return await storage.bucket(bucketname).file({
-    destination: folder + (file.originalname.replace(
-      path.extname(file.originalname),
-      ".pdf"
-    )),
+    destination: folder + file.originalname,
   }).save(file)
 };
 
