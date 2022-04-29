@@ -146,7 +146,7 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
       });
     });
   */
-  var resp = await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
+  const resp = await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
   console.log("hello!: " + resp);
 
     res.send({
