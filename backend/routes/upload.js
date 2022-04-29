@@ -145,11 +145,12 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
     });
   */
   await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then((r)=>{
-    console.log("https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +NewName);
+    const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +NewName;
 
     res.send({
       status: "200",
       message: "File uploaded successfully! Processing..",
+      link : FinalLink,
     });
   });
   
