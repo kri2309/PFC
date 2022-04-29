@@ -13,9 +13,12 @@ const db = new Firestore({
 //Collection (Table)
 //Document (Row)
 //docRef selects the collection
+var docId = "";
 export async function AddDocument(collection, data) {
   const docRef = db.collection(collection).doc();
-  return await docRef.set(data);
+  const docR = await docRef.set(data);
+  docId = docR.id;
+  return docR;
 }
 
 export async function GetDocument(collection, valueType, value) {

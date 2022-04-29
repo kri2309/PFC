@@ -42,6 +42,7 @@ const UploadPDF = async (folder, file) => {
 //await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
 
 const callback2 = (err , messageId)=>{
+  console.log("MsgId: " + messageId);
   if(err){
     console.log(err);
   }
@@ -146,7 +147,9 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
   */
   await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then((r)=>{
     const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +NewName;
-
+    publishMessage({
+      completed : FinalLink
+    });
     res.send({
       status: "200",
       message: "File uploaded successfully! Processing..",
