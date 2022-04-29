@@ -147,7 +147,7 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
     });
   */
   await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then((r)=>{
-    console.log("hello!: " + resp);
+    console.log("hello!: " + r);
 
     res.send({
       status: "200",
