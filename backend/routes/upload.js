@@ -127,7 +127,9 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
     const newfile = new Buffer.from(response_64, "base64");
     console.log(newfile);
 
-    const NewName = req.file.originalname.replace(
+    const NewName = req.file.originalname;
+    
+    NewName.replace(
       path.extname(req.file.originalname),
       ".pdf"
     );
