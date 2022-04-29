@@ -146,13 +146,15 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
       });
     });
   */
-  const resp = await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
-  console.log("hello!: " + resp);
+  await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then((r)=>{
+    console.log("hello!: " + resp);
 
     res.send({
       status: "200",
       message: "File uploaded successfully! Processing..",
     });
+  });
+  
     
   }
 });
