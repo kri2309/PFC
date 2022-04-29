@@ -147,6 +147,7 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
     });
   */
   const resp = await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
+  console.log("hello!: " + resp.metadata.mediaLink);
 
     res.send({
       status: "200",
