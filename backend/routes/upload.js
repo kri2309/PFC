@@ -72,7 +72,7 @@ let imageUpload = multer({
     fileSize: 2621441,
   },
 });
-upload.route("/").post(imageUpload.single("image"), (req, res) => {
+upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
   const token = req.headers.cookie.split("token=")[1].split(";")[0];
   validateToken(token).then((r) => {
   const email = r.getPayload().email;
@@ -144,7 +144,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
       });
     });
   */
-  //await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
+  await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile);
 
     res.send({
       status: "200",
