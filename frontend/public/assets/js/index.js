@@ -1,3 +1,5 @@
+import axios from "axios";
+
 let signInButton = document.getElementById("signIn");
 let signOutButton = document.getElementById("signOut");
 let profile = document.getElementById("profile");
@@ -159,19 +161,12 @@ async function GetAdminInfo() {
     console.log(response.data.admin);
   }
 }
-async function Add10Credits() {
-  const url = `/credits`;
-  const headers = {
-    "Content-Type": "text/html",
-    "Access-Control-Allow-Origin": "*",
-  };
-  const response = await axios.post(url, headers);
-  console.log(`Runtime credits: ${response.data.credits}`);
-  response.data.credits = response.data.credits + 10;
-  console.log(`Updated credits: ${response.data.credits}`);
+async function AddCredits(number) {
+  const url = `setcredits?email=${email}&amount${number}`;
+  const res = await axios.post(url);
+  console.log("bought credits: "+number);
 }
-async function Add20Credits() {}
-async function Add30Credits() {}
+
 /*
 async function getcredits(){
   const email = await authenticateReq(googleUser.getAuthResponse().id_token);

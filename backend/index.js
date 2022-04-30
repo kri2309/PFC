@@ -84,12 +84,19 @@ app.use("/payments", payments);
 
 app.use("/clean", clean);
 
+
 //Delivering index.html;
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 app.post("/credits", (req, res) => {
+  GetCredits().then((methodResult)=>{
+    res.send({result: "CreditsAcquired", reason: "Credits here!", credits: JSON.stringify(methodResult)});
+  });
+});
+
+app.post("/setcredits", (req, res) => {
   GetCredits().then((methodResult)=>{
     res.send({result: "CreditsAcquired", reason: "Credits here!", credits: JSON.stringify(methodResult)});
   });
