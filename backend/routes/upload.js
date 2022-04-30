@@ -156,7 +156,6 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
   res.send({
     status: "200",
     message: "File uploaded successfully! Processing..",
-    link : FinalLink,
   });
     
   }
