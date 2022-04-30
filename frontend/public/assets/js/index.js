@@ -164,6 +164,8 @@ async function AddCredits(number) {
   const url = `setcredits?email=${email}&number=${number}`;
   const res = await axios.post(url);
   console.log("bought credits: "+number);
+  RunCredits();
+
 }
 
 /*
