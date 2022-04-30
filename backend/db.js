@@ -64,7 +64,7 @@ export async function GetCredits(){
 
 export async function SetCredits(email, number){
   const getdoc = await GetUser(email);
-  var Credits = Number(getdoc[0].data().credits)+ Number(amount);
+  var Credits = Number(getdoc[0].credits)+ Number(number);
   const docRef = db.collection("userData").doc(getdoc.id);
   const r = await docRef.update({
     credits: Number(Credits),
