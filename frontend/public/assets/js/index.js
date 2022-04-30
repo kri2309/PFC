@@ -5,7 +5,6 @@ let signInContainer = document.getElementById("signInContainer");
 let credits = document.getElementById("credits");
 let user_name = "";
 let adminPanel = document.getElementById("admin-container");
-let accordion = document.getElementById("accordion");
 
 const selectFile = () => {
   if (user_name) {
@@ -32,7 +31,6 @@ const authenticateReq = async (token) => {
     const expiry = response.data.expiry;
     profile.style.display = "inline";
     signInContainer.style.display = "none";
-    accordion.style.display = "inline";
 
     document.getElementById("navbarDropdownMenuLink").innerHTML =
       `<img
@@ -82,7 +80,6 @@ async function loadGoogleLogin() {
         adminPanel.style.display = "none";
         document.getElementById("payments-container").innerHTML = " ";
         profile.style.display = "none";
-        accordion.style.display = "none";
         signInContainer.style.display = "inline";
         console.log("User signed out.");
       })
