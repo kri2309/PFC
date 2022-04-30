@@ -5,7 +5,7 @@ let signInContainer = document.getElementById("signInContainer");
 let credits = document.getElementById("credits");
 let user_name = "";
 let adminPanel = document.getElementById("admin-container");
-const email = "";
+var email = "";
 const selectFile = () => {
   if (user_name) {
     uploadFile();
