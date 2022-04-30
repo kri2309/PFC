@@ -66,7 +66,7 @@ export async function GetAdminInfo(){
   return adminInfo;
 }
 
-async function GetLatestDoc(){
+export async function GetLatestDoc(){
   const docRef = db.collection("userData");
   const snapshot = await docRef.where("email", "==", email).get();
   snapshot.forEach((doc) => {
