@@ -166,9 +166,8 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
         const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" + NewName;
         console.log("Getting last doc of email: " + email);
         const lastDocRef = await GetLatestDoc(email);
-        console.log("lastDocRef id " + lastDocRef)
         const doc = db.collection('conversions').doc(lastDocRef);
-        
+        console.log("lastDocRef id " + lastDocRef)
         const res = await doc.update({
           completed: FinalLink,
         });
