@@ -9,6 +9,7 @@ import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import admin from "./routes/admin.js";
 import payments from "./routes/payments.js";
+import clean from "./routes/clean.js";
 
 const DEV = false;
 const PORT = DEV ? 80 : 443;
@@ -80,6 +81,8 @@ app.use("/upload", upload);
 app.use("/admin", admin);
 
 app.use("/payments", payments);
+
+app.use("/clean", clean);
 
 //Delivering index.html;
 app.get("/", (req, res) => {
