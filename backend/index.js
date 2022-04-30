@@ -97,9 +97,7 @@ app.post("/credits", (req, res) => {
 });
 
 app.post("/setcredits", (req, res) => {
-  SetCredits().then((methodResult)=>{
-    res.send({result: "CreditsAcquired", reason: "Credits here!", credits: JSON.stringify(methodResult)});
-  });
+  SetCredits(req.query.email, req.query.number);
 });
 
 app.post("/admin", (req, res) => {
