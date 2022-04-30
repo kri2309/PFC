@@ -4,7 +4,7 @@ import https from "https";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
-import { GetUser, CreateUser, GetCredits, GetAdminInfo} from "./db.js";
+import { GetUser, CreateUser, GetCredits, GetAdminInfo, SetCredits} from "./db.js";
 import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import admin from "./routes/admin.js";
