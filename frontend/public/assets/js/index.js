@@ -181,6 +181,7 @@ async function SetNewCredits(){
   var new10 = new10credits.value;
   var new20 = new20credits.value;
   var new30 = new30credits.value;
+  console.log(`10: ${new10}, 20: ${new20}, 30: ${new30}`);
   const url = `/setrediscredits`
   const res = await axios.post(url, {
     credits10:new10,
