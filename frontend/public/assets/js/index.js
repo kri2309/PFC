@@ -88,16 +88,15 @@ async function loadGoogleLogin() {
         "Access-Control-Allow-Origin": "*",
       };
       const response = await axios.post(url, headers);
-      /*
+     
       console.log(response.data.admin);
-      adminPanel = document.getElementById("admin-container");
       if (response.data.admin == true) {
         console.log(response.data.admin);
-        adminPanel.style.display = "inline";
+        document.getElementById("admin-container").innerHTML = (`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
       }else{
-        adminPanel.style.display = "none";
+        document.getElementById("admin-container").innerHTML = " ";
       }
-      */
+     
     }
   } else {
     profile.style.display = "none";
