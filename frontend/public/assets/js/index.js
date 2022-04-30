@@ -5,7 +5,7 @@ let signInContainer = document.getElementById("signInContainer");
 let credits = document.getElementById("credits");
 let user_name = "";
 let adminPanel = document.getElementById("admin-container");
-
+const email = "";
 const selectFile = () => {
   if (user_name) {
     uploadFile();
@@ -26,7 +26,7 @@ const authenticateReq = async (token) => {
   if (status == 200) {
     user_name = response.data.name;
     const name = response.data.name;
-    const email = response.data.email;
+    email = response.data.email;
     const picture = response.data.picture;
     const expiry = response.data.expiry;
     profile.style.display = "inline";
@@ -103,7 +103,7 @@ async function loadGoogleLogin() {
       async function (googleUser) {
         console.log("hell0");
 
-        const email = await authenticateReq(
+        email = await authenticateReq(
           googleUser.getAuthResponse().id_token
         );
         console.log(email);
