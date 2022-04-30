@@ -1,5 +1,3 @@
-import axios from "axios";
-
 let signInButton = document.getElementById("signIn");
 let signOutButton = document.getElementById("signOut");
 let profile = document.getElementById("profile");
@@ -161,6 +159,7 @@ async function GetAdminInfo() {
     console.log(response.data.admin);
   }
 }
+
 async function AddCredits(number) {
   const url = `setcredits?email=${email}&amount${number}`;
   const res = await axios.post(url);
