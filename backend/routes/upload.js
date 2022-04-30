@@ -6,6 +6,7 @@ import {Storage } from "@google-cloud/storage";
 import { PubSub } from "@google-cloud/pubsub";
 import fs from "fs";
 import { validateToken } from "./auth.js";
+import { GetLatestDoc } from "../db.js";
 import axios from "axios";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -132,24 +133,15 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
       path.extname(req.file.originalname),
       ".pdf"
     );
-/*
-    UploadPDF("completed/", newfile).then(([r]) => {
-      console.log(r.metadata.mediaLink);
 
-  
-      publishMessage({
-        email: email,
-        filename: newfile,
-        completed: r.metadata.mediaLink,
-        date: new Date().toUTCString(),
-      });
-    });
-  */
   await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then((r)=>{
     const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +NewName;
-    publishMessage({
-      completed : FinalLink
+    const lastDocRef = await GetLatestDoc();
+    const doc = db.collection('conversions').doc(lastDocRef);
+    const res = await doc.update({
+      completed: FinalLink,
     });
+    console.log("File converted successfully!")
     res.send({
       status: "200",
       message: "File uploaded successfully! Processing..",

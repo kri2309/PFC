@@ -3,6 +3,8 @@ import { createHmac } from "crypto";
 
 var userCredits = 0;
 var adminInfo = false;
+var docID = "";
+var latestDate = new Date();
 
 //Instantiating Firestore with project details
 const db = new Firestore({
@@ -62,4 +64,20 @@ export async function GetCredits(){
 
 export async function GetAdminInfo(){
   return adminInfo;
+}
+
+async function GetLatestDoc(){
+  const docRef = db.collection("userData");
+  const snapshot = await docRef.where("email", "==", email).get();
+  snapshot.forEach((doc) => {
+    if(latestDate == null || docID == ""){
+      latestDate = doc.date;
+      docID = doc.id;
+    } 
+    else if(doc.date < latestDate){
+      latestDate = doc.date;
+      docID = doc.id;
+    }
+  });
+  return docID;
 }
