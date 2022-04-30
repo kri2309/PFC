@@ -15,6 +15,9 @@ const __dirname = dirname(__filename);
 const upload = Express.Router();
 const bucketname = "programmingforthecloud-340711.appspot.com";
 var email = null;
+var ext = "";
+var url = "";
+var headers = null;
 
 const db = new Firestore({
   projectId: "programmingforthecloud-340711",
@@ -71,9 +74,9 @@ let imageUpload = multer({
     },
   }),
   fileFilter: function (req, file, callback) {
-    var ext = path.extname(file.originalname);
-    if (ext !== ".png" && ext !== ".jpg" && ext !== ".gif" && ext !== ".jpeg") {
-      return callback(new Error("Only images are allowed"));
+    ext = path.extname(file.originalname);
+    if (ext !== ".png" && ext !== ".jpg" && ext !== ".gif" && ext !== ".jpeg" && ext !== ".doc" && ext !== ".docx") {
+      return callback(new Error("Only images and docs are allowed"));
     }
     callback(null, true);
   },
@@ -102,18 +105,33 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
     });
 
     //Convert to base64
-    var base64file = fs.readFileSync(req.file.path, "base64");
-    //console.log(base64file);
+    ext = path.extname(file.originalname);
+    if (ext == ".png" || ext == ".jpg" || ext == ".gif" || ext == ".jpeg"){
+      var base64file = fs.readFileSync(req.file.path, "base64");
+      //console.log(base64file);
+  
+      //Send to PDF Conversion API
+  
+      url = `https://getoutpdf.com/api/convert/image-to-pdf`;
+      headers = {
+        //"Content-Type": "application/json",
+        api_key:
+          "ed4129c1077bfcfbe13885c696190a477b0ac821e09371b7076b2454cdb35c83",
+        image: `${base64file}`,
+      };
 
-    //Send to PDF Conversion API
+    }
+   
 
-    const url = `https://getoutpdf.com/api/convert/image-to-pdf`;
-    const headers = {
-      //"Content-Type": "application/json",
-      api_key:
-        "ed4129c1077bfcfbe13885c696190a477b0ac821e09371b7076b2454cdb35c83",
-      image: `${base64file}`,
-    };
+    if (ext !== ".doc" || ext !== ".docx"){
+       url = `https://getoutpdf.com/api/convert/document-to-pdf`;
+       headers = {
+        //"Content-Type": "application/json",
+        api_key:
+          "ed4129c1077bfcfbe13885c696190a477b0ac821e09371b7076b2454cdb35c83",
+        image: `${req.file.path}`,
+      };
+    }
 
     var data = {
       api_key:
