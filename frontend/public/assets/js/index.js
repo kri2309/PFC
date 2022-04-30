@@ -4,7 +4,6 @@ let profile = document.getElementById("profile");
 let signInContainer = document.getElementById("signInContainer");
 let credits = document.getElementById("credits");
 let user_name = "";
-let adminPanel = document.getElementById("admin-container");
 var email = "";
 let new10credits = document.getElementById("10credits");
 let new20credits = document.getElementById("20credits");
@@ -160,7 +159,7 @@ async function loadGoogleLogin() {
           console.log(response.data.admin);
           if (response.data.admin == true) {
             console.log(response.data.admin);
-            document.getElementById("admin-container").innerHTML(`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
+            document.getElementById("admin-container").innerHTML = (`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
             
 
           }
@@ -194,7 +193,7 @@ async function GetAdminInfo() {
   };
   const response = await axios.post(url, headers);
   if (Boolean(response.data.admin) == true) {
-    document.getElementById("admin-container").innerHTML(`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
+    document.getElementById("admin-container").innerHTML = (`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
   } else {
     document.getElementById("admin-container").innerHTML = " ";
   }
