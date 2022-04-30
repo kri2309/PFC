@@ -125,7 +125,7 @@
                   
 
                             <div class="form-button mt-3">
-                                <button id="submit" onclick="SetNewCredits()" type="submit" class="btn btn-primary">Update</button>
+                                <button id="submit" type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>
@@ -144,8 +144,7 @@
     </div>
   </footer>
 
-<script>
-
+<script >
   (function () {
 'use strict'
 const forms = document.querySelectorAll('.requires-validation')
@@ -155,7 +154,12 @@ Array.from(forms)
       if (!form.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
+        
+      }else{
+        console.log("Setting new credits");
+        SetNewCredits();
       }
+      
 
       form.classList.add('was-validated')
     }, false)
