@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const upload = Express.Router();
 const bucketname = "programmingforthecloud-340711.appspot.com";
-var email = null;
+var email = "";
 var ext = "";
 var url = "";
 var headers = null;
@@ -88,6 +88,7 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
   const token = req.headers.cookie.split("token=")[1].split(";")[0];
   validateToken(token).then(async function (r) {
   email = r.getPayload().email;
+  console.log("email!!!: " + email);
   if (req.file) {
     console.log("File downloaded at: " + req.file.path);
 
@@ -163,6 +164,7 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
 
   await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then( async function(r){
     const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +NewName;
+    console.log
     const lastDocRef = await GetLatestDoc(email);
     const doc = db.collection('conversions').doc(lastDocRef);
     console.log("lastDocRef id " + lastDocRef.id)
