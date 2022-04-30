@@ -72,7 +72,24 @@ const authenticateReq = async (token) => {
 async function loadGoogleLogin() {
   let session = document.cookie;
   if (session && session.includes("token")) {
-    authenticateReq(session.split("token=")[1].split(";")[0]);
+    email = await authenticateReq(session.split("token=")[1].split(";")[0]);
+
+    if (email != null) {
+      const url = "/login?email=" + email;
+      const headers = {
+        "Content-Type": "text/html",
+        "Access-Control-Allow-Origin": "*",
+      };
+      const response = await axios.post(url, headers);
+      console.log(response.data.admin);
+      adminPanel = document.getElementById("admin-container");
+      if (response.data.admin == true) {
+        console.log(response.data.admin);
+        adminPanel.style.display = "inline";
+      }else{
+        adminPanel.style.display = "none";
+      }
+    }
   } else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
