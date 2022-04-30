@@ -167,7 +167,7 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
         console.log("Getting last doc of email: " + email);
         const lastDocRef = await GetLatestDoc(email);
         const doc = db.collection('conversions').doc(lastDocRef);
-        console.log("lastDocRef id " + lastDocRef.id)
+        console.log("lastDocRef id " + lastDocRef)
         const res = await doc.update({
           completed: FinalLink,
         });
