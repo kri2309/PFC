@@ -97,6 +97,7 @@ app.post("/credits", (req, res) => {
 });
 
 app.post("/setrediscredits", (req, res) => {
+  console.log("Hiii: " + req.body);
   SetNewCreditPrices(req.body).then((methodResult)=>{
     res.send({result: "newCreditPrices", reason: "new Credits here!", credits: JSON.stringify(methodResult)});
   });
