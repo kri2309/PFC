@@ -97,21 +97,21 @@
 
                             <div class="col-md-12">
                               <p>Price for 10 credits.</p>
-                               <input class="form-control" type="number" name="10credits" placeholder="10 credits" required>
+                               <input class="form-control" type="number" id="10credits" name="10credits" placeholder="10 credits" required>
                                <div class="valid-feedback">10 credits field is valid!</div>
                                <div class="invalid-feedback">10c redits field cannot be blank!</div>
                             </div>
 
                             <div class="col-md-12">
                               <p>Price for 20 credits.</p>
-                                <input class="form-control" type="number" name="20credits" placeholder="20 credits" required>
+                                <input class="form-control" type="number" id="20credits" name="20credits" placeholder="20 credits" required>
                                  <div class="valid-feedback">20 credits field is valid!</div>
                                  <div class="invalid-feedback">20 credits field cannot be blank!</div>
                             </div>
 
                             <div class="col-md-12">
                               <p>Price for 30 credits.</p>
-                                <input class="form-control" type="number" name="30credits" placeholder="30 credits" required>
+                                <input class="form-control" type="number" id="30credits"  name="30credits" placeholder="30 credits" required>
                                  <div class="valid-feedback">30 credits field is valid!</div>
                                  <div class="invalid-feedback">30 credits field cannot be blank!</div>
                             </div>
@@ -125,7 +125,7 @@
                   
 
                             <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Update</button>
+                                <button id="submit" onclick="RefreshCredits()" type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>
@@ -145,6 +145,7 @@
   </footer>
 
 <script>
+
   (function () {
 'use strict'
 const forms = document.querySelectorAll('.requires-validation')

@@ -96,6 +96,14 @@ app.post("/credits", (req, res) => {
   });
 });
 
+app.post("/setrediscredits", (req, res) => {
+  SetNewCreditPrices(req.body).then((methodResult)=>{
+    res.send({result: "newCreditPrices", reason: "new Credits here!", credits: JSON.stringify(methodResult)});
+  });
+});
+
+
+
 app.post("/setcredits", (req, res) => {
   console.log(`quert number: ${req.query.number}`);
   SetCredits(req.query.email, req.query.number).then((methodResult)=>{

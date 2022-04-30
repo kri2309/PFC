@@ -6,6 +6,14 @@ let credits = document.getElementById("credits");
 let user_name = "";
 let adminPanel = document.getElementById("admin-container");
 var email = "";
+let new10credits = document.getElementsById("10credits");
+let new20credits = document.getElementsById("20credits");
+let new30credits = document.getElementsById("30credits");
+let new10creditslabel = document.getElementsById("10creditslabel");
+let new20creditslabel = document.getElementsById("20creditslabel");
+let new30creditslabel = document.getElementsById("30creditslabel");
+
+
 const selectFile = () => {
   if (user_name) {
     uploadFile();
@@ -165,6 +173,20 @@ async function AddCredits(number) {
   const res = await axios.post(url);
   console.log("bought credits: "+number);
   RunCredits();
+
+}
+
+async function SetNewCredits(){ 
+  var new10credits = new10creditslabel.value;
+  var new20credits = new20creditslabel.value;
+  var new30credits = new30creditslabel.value;
+  const url = `/setrediscredits`
+  const res = await axios.post(url, {
+    credits10:new10credits,
+    credits20:new20credits,
+    credits30:new30credits
+  });
+  
 
 }
 

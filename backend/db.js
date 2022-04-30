@@ -1,5 +1,39 @@
 import Firestore from "@google-cloud/firestore";
 import { createHmac } from "crypto";
+import Redis from "redis";
+
+export let redisClient = new Redis.createClient();
+
+redisClient.on("error", function(error){
+  console.error(error);
+});
+
+//change name
+const GetNewCredit = async()=>{
+  return redisClient.get("creditPrices");
+}
+
+const SetNewCredits = async(payload)=>{
+  return await redisClient.set("credits", JSON.stringify(payload));
+}
+
+export async function SetNewCreditPrices(payload){
+  if(!redisClient.isOpen){
+    await redisClient.connect();
+  }
+  const res = await SetNewCreditPrices(payload);
+
+  return res;
+}
+
+export async function GetNewCreditPrices(payload){
+  if(!redisClient.isOpen){
+    await redisClient.connect();
+  }
+  const res = await GetNewCreditPrices(payload);
+
+  return res;
+}
 
 var userCredits = 0;
 var adminInfo = false;
