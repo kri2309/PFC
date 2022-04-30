@@ -6,12 +6,12 @@ let credits = document.getElementById("credits");
 let user_name = "";
 let adminPanel = document.getElementById("admin-container");
 var email = "";
-let new10credits = document.getElementsById("10credits");
-let new20credits = document.getElementsById("20credits");
-let new30credits = document.getElementsById("30credits");
-let new10creditslabel = document.getElementsById("10creditslabel");
-let new20creditslabel = document.getElementsById("20creditslabel");
-let new30creditslabel = document.getElementsById("30creditslabel");
+let new10credits = document.getElementById("10credits");
+let new20credits = document.getElementById("20credits");
+let new30credits = document.getElementById("30credits");
+let new10creditslabel = document.getElementById("10creditslabel");
+let new20creditslabel = document.getElementById("20creditslabel");
+let new30creditslabel = document.getElementById("30creditslabel");
 
 
 const selectFile = () => {
