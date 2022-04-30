@@ -177,6 +177,7 @@ async function AddCredits(number) {
 }
 
 async function SetNewCredits(){ 
+  console.log("Setting new credits!");
   var new10credits = new10creditslabel.value;
   var new20credits = new20creditslabel.value;
   var new30credits = new30creditslabel.value;
