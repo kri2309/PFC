@@ -97,7 +97,9 @@ app.post("/credits", (req, res) => {
 });
 
 app.post("/setcredits", (req, res) => {
-  SetCredits(req.query.email, req.query.number);
+  SetCredits(req.query.email, req.query.number).then((methodResult)=>{
+    res.send({result: "CreditsUpdated",  reason: "Credits updated!", credits: JSON.stringify(methodResult)});
+  });
 });
 
 app.post("/admin", (req, res) => {
