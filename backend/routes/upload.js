@@ -165,10 +165,11 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
     const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +NewName;
     const lastDocRef = await GetLatestDoc(email);
     const doc = db.collection('conversions').doc(lastDocRef);
+    console.log("lastDocRef id " + lastDocRef.id)
     const res = await doc.update({
       completed: FinalLink,
     });
-    console.log("File converted successfully!")
+    console.log("File converted successfully!");
    
   });
   res.send({
