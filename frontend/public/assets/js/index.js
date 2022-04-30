@@ -84,7 +84,6 @@ async function loadGoogleLogin() {
     auth2
       .signOut()
       .then(() => {
-        adminPanel = document.getElementById("admin-container");
         adminPanel.style.display = "none";
         document.getElementById("payments-container").innerHTML = " ";
         profile.style.display = "none";
