@@ -161,9 +161,9 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
         path.extname(req.file.originalname),
         ".pdf"
       );
-
+        var FinalLink = "";
       await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then(async function (r) {
-        const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" + NewName;
+        FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" + NewName;
         console.log("Getting last doc of email: " + email);
         const lastDocRef = await GetLatestDoc(email);
         const doc = db.collection('conversions').doc(lastDocRef);
@@ -177,6 +177,7 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
       res.send({
         status: "200",
         message: "File uploaded successfully! Processing..",
+        link : FinalLink,
       });
 
     }
