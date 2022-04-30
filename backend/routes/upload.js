@@ -105,7 +105,7 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
     });
 
     //Convert to base64
-    ext = path.extname(file.originalname);
+    ext = path.extname(req.file.originalname);
     if (ext == ".png" || ext == ".jpg" || ext == ".gif" || ext == ".jpeg"){
       var base64file = fs.readFileSync(req.file.path, "base64");
       //console.log(base64file);
