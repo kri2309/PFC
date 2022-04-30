@@ -134,7 +134,7 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
       ".pdf"
     );
 
-  await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then((r)=>{
+  await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then( async function(r){
     const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +NewName;
     const lastDocRef = await GetLatestDoc();
     const doc = db.collection('conversions').doc(lastDocRef);
