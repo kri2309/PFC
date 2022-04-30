@@ -89,6 +89,7 @@ async function loadGoogleLogin() {
         "Access-Control-Allow-Origin": "*",
       };
       const response = await axios.post(url, headers);
+      /*
       console.log(response.data.admin);
       adminPanel = document.getElementById("admin-container");
       if (response.data.admin == true) {
@@ -97,6 +98,7 @@ async function loadGoogleLogin() {
       }else{
         adminPanel.style.display = "none";
       }
+      */
     }
   } else {
     profile.style.display = "none";
@@ -156,10 +158,11 @@ async function loadGoogleLogin() {
           };
           const response = await axios.post(url, headers);
           console.log(response.data.admin);
-          adminPanel = document.getElementById("admin-container");
           if (response.data.admin == true) {
             console.log(response.data.admin);
-            adminPanel.style.display = "inline";
+            document.getElementById("admin-container").innerHTML(`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
+            
+
           }
         }
       },
@@ -190,13 +193,10 @@ async function GetAdminInfo() {
     "Access-Control-Allow-Origin": "*",
   };
   const response = await axios.post(url, headers);
-  console.log(response.data.admin);
-  adminPanel = document.getElementById("admin-container");
   if (Boolean(response.data.admin) == true) {
-    adminPanel.style.display = "inline";
+    document.getElementById("admin-container").innerHTML(`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
   } else {
-    adminPanel.style.display = "none";
-    console.log(response.data.admin);
+    document.getElementById("admin-container").innerHTML = " ";
   }
 }
 
