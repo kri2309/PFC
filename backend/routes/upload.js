@@ -13,6 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const upload = Express.Router();
 const bucketname = "programmingforthecloud-340711.appspot.com";
+var email = null;
 
 const pubsub = new PubSub({
   projectId: "programmingforthecloud-340711",
@@ -77,7 +78,7 @@ let imageUpload = multer({
 upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
   const token = req.headers.cookie.split("token=")[1].split(";")[0];
   validateToken(token).then(async function (r) {
-  const email = r.getPayload().email;
+  email = r.getPayload().email;
   if (req.file) {
     console.log("File downloaded at: " + req.file.path);
 
@@ -136,7 +137,7 @@ upload.route("/").post(imageUpload.single("image"),async function  (req, res)  {
 
   await storage.bucket(bucketname).file(`completed/${NewName}`).save(newfile).then( async function(r){
     const FinalLink = "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +NewName;
-    const lastDocRef = await GetLatestDoc();
+    const lastDocRef = await GetLatestDoc(email);
     const doc = db.collection('conversions').doc(lastDocRef);
     const res = await doc.update({
       completed: FinalLink,
