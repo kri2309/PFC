@@ -110,7 +110,7 @@ async function loadGoogleLogin() {
     auth2
       .signOut()
       .then(() => {
-        adminPanel.style.display = "none";
+        document.getElementById("admin-container").innerHTML = " ";
         document.getElementById("payments-container").innerHTML = " ";
         document.getElementById("convert").innerHTML = `<button
         type="button"
