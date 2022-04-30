@@ -67,7 +67,7 @@ export async function GetAdminInfo(){
 }
 
 export async function GetLatestDoc(email){
-  const docRef = db.collection("userData");
+  const docRef = db.collection("conversions");
   const snapshot = await docRef.where("email", "==", email).get();
   snapshot.forEach((doc) => {
     if(latestDate == null || docID == ""){
