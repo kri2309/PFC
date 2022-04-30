@@ -73,6 +73,7 @@ export async function SetCredits(email, number){
   const r = await docRef.update({
     credits: Number(Credits),
   });
+  userCredits = Credits;
 }
 
 export async function GetAdminInfo(){
