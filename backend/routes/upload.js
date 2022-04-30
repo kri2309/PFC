@@ -8,12 +8,18 @@ import fs from "fs";
 import { validateToken } from "./auth.js";
 import { GetLatestDoc } from "../db.js";
 import axios from "axios";
+import Firestore from "@google-cloud/firestore";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const upload = Express.Router();
 const bucketname = "programmingforthecloud-340711.appspot.com";
 var email = null;
+
+const db = new Firestore({
+  projectId: "programmingforthecloud-340711",
+  keyFilename: "./key.json",
+});
 
 const pubsub = new PubSub({
   projectId: "programmingforthecloud-340711",
