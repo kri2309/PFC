@@ -55,6 +55,14 @@ const authenticateReq = async (token) => {
       "payments-container"
     ).innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`;
 
+    document.getElementById("convert").innerHTML = `<button
+    type="button"
+    class="btn btn-dark"
+    onclick="selectFile()"
+  >
+    Convert
+  </button>`;
+
     document.getElementById("picture").src = picture;
     document.cookie = `token=${token};expires=${expiry}`;
     console.log(`${name} signed in successfully.`);
@@ -103,6 +111,14 @@ async function loadGoogleLogin() {
       .then(() => {
         adminPanel.style.display = "none";
         document.getElementById("payments-container").innerHTML = " ";
+        document.getElementById("convert").innerHTML = `<button
+        type="button"
+        class="btn btn-dark"
+        onclick="selectFile()"
+        disabled
+      >
+        Convert
+      </button>`;
         profile.style.display = "none";
         signInContainer.style.display = "inline";
         console.log("User signed out.");
