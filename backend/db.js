@@ -21,7 +21,7 @@ export async function SetNewCreditPrices(payload){
   if(!redisClient.isOpen){
     await redisClient.connect();
   }
-  const res = await SetNewCreditPrices(payload);
+  const res = await SetNewCredits(payload);
 
   return res;
 }
@@ -30,7 +30,7 @@ export async function GetNewCreditPrices(payload){
   if(!redisClient.isOpen){
     await redisClient.connect();
   }
-  const res = await GetNewCreditPrices(payload);
+  const res = await GetNewCredit();
 
   return res;
 }
