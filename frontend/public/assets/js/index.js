@@ -178,14 +178,14 @@ async function AddCredits(number) {
 
 async function SetNewCredits(){ 
   console.log("Setting new credits!");
-  var new10credits = new10creditslabel.value;
-  var new20credits = new20creditslabel.value;
-  var new30credits = new30creditslabel.value;
+  var new10 = new10credits.value;
+  var new20 = new20credits.value;
+  var new30 = new30credits.value;
   const url = `/setrediscredits`
   const res = await axios.post(url, {
-    credits10:new10credits,
-    credits20:new20credits,
-    credits30:new30credits
+    credits10:new10,
+    credits20:new20,
+    credits30:new30
   });
   
 
