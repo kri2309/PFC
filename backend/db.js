@@ -4,6 +4,7 @@ import { createHmac } from "crypto";
 var userCredits = 0;
 var adminInfo = false;
 var docID = "";
+var docIDUser= "";
 var latestDate = new Date();
 
 //Instantiating Firestore with project details
@@ -48,12 +49,14 @@ export async function GetUser(email) {
   const snapshot = await docRef.where("email", "==", email).get();
   let data = [];
   snapshot.forEach((doc) => {
+    docIDUser = doc.id;
     data.push(doc.data());
   });
 
   if(data.length > 0){
     userCredits = data[0].credits;
     adminInfo = data[0].admin;
+    
   }
   return data;
 }
@@ -65,7 +68,7 @@ export async function GetCredits(){
 export async function SetCredits(email, number){
   const getdoc = await GetUser(email);
   var Credits = Number(getdoc[0].credits)+ Number(number);
-  const docRef = db.collection("userData").doc(getdoc.id);
+  const docRef = db.collection("userData").doc(docIDUser);
   const r = await docRef.update({
     credits: Number(Credits),
   });
