@@ -6,6 +6,7 @@ const CLIENT_ID = "924492803178-ga7q7qvqllu5ons0kn2iu7699a0udi0q.apps.googleuser
 const auth = Express.Router();
 const client = new OAuth2Client(CLIENT_ID);
 
+//Making a UserInfo to pass info from backend to frontend
 export let UserInfo = {
   Email: "",
   Admin: false,
@@ -18,6 +19,8 @@ export function getUserInfo(){
 
 export default auth;
 
+
+//checking google token
 auth.route("/").post((req, res) => {
   const token = req.query.token;
   validateToken(token)
@@ -50,6 +53,7 @@ auth.route("/").post((req, res) => {
     });;
 });
 
+//useless
 async function checkLogin(email,credits,admin){
 let data = await GetUser(email)
 if (data === undefined){
@@ -64,6 +68,7 @@ else{
 return data;
 }
 
+//token
 export const validateToken = async (token) => {
   return await client.verifyIdToken({
     idToken: token,

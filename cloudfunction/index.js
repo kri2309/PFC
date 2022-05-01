@@ -5,8 +5,10 @@ const db = new Firestore({
   keyFilename: "./key.json",
 });
 
+//let docref - "";
 const AddDocument = async (collection, data) => {
   const docRef = db.collection(collection).doc();
+  //docref = docRef;
   return await docRef.set(data);
 };
 

@@ -8,16 +8,19 @@ redisClient.on("error", function(error){
   console.error(error);
 });
 
-//change name
+//redis changing credit prices
 const GetNewCredit = async()=>{
   return redisClient.get("creditPrices");
 }
 
+//redis-cli
+//get creditPrices
 const SetNewCredits = async(payload)=>{
   console.log("setting creditPrices to " + payload);
   return await redisClient.set("creditPrices", JSON.stringify(payload));
 }
 
+//redis
 export async function SetNewCreditPrices(payload){
   if(!redisClient.isOpen){
     await redisClient.connect();
@@ -36,6 +39,7 @@ export async function GetNewCreditPrices(payload){
   return res;
 }
 
+//global variables 
 var userCredits = 0;
 var adminInfo = false;
 var docID = "";
@@ -96,6 +100,7 @@ export async function GetUser(email) {
   return data;
 }
 
+//gets the credits that matches the user email given
 export async function GetCredits(email){
   const docRef = db.collection("userData");
   const snapshot = await docRef.where("email", "==", email).get();
@@ -107,7 +112,6 @@ export async function GetCredits(email){
 
 export async function SetCredits(email, number){
   const getdoc = await GetUser(email);
-  console.log(`emai : ${email} + number: ${number}`);
   var Credits = Number(getdoc[0].credits)+ Number(number);
   const docRef = db.collection("userData").doc(docIDUser);
   const r = await docRef.update({
