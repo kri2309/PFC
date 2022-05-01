@@ -199,29 +199,10 @@ async function GetDocs() {
     "Access-Control-Allow-Origin": "*",
   };
   const response = await axios.post(url, headers);
-  console.log(response.data.alldocs);
-  var data = [];
-  var dataJson = response.data.alldocs;
-  for( var i in dataJson){
-   result.push([i,data[i]]);
-  }
-  var myTable = document.createElement("table"),
-  row = myTable.insertRow(), cell;
+  console.log(response.data);
 
-  var perrow = 5; // 5 CELLS PER ROW
-  data.forEach((value, i) => {
-    console.log(value);
-  // ADD CELL
-  cell = row.insertCell();
-  cell.innerHTML = value;
+};
 
-  var next = i + 1;
-  if (next%perrow==0 && next!=data.length) { row = myTable.insertRow(); }
-});
-
-document.getElementById("table-container").appendChild(myTable);
-  
-}
 
 async function GetAdminInfo() {
   const url = `/admin`;
