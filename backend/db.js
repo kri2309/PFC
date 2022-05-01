@@ -146,6 +146,7 @@ export async function GetLatestDoc(email, filename){
       docID = doc.id;
     } 
     else if(doc.date > latestDate && (doc.data().filename == filename)){
+      console.log("filename:"+doc.data().filename );
       latestDate = doc.date;
       docID = doc.id;
     }
