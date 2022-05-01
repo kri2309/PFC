@@ -99,7 +99,7 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
       UploadCloud("pending/", req.file)
         .catch(console.error)
         .then(async ([r]) =>{
-          let base64Code = base64convert(file.path);
+          let base64Code = base64convert(req.file.path);
           publishMessage({
             convertedFile: base64Code,
             email: email,
