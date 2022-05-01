@@ -224,7 +224,7 @@ async function GetDocs() {
       <td style = " border: 1px solid #ddd;
       text-align: left; padding: 15px;">${oneData.email}</td>
       <td style = " border: 1px solid #ddd;
-      text-align: left; padding: 15px;  background-color: #f44336;
+      text-align: left; padding: 15px;  background-color: #fff;
       color: white;
       padding: 14px 25px;
       text-align: center;
