@@ -141,12 +141,12 @@ export async function GetLatestDoc(email, filename){
   
   const snapshot = await docRef.where("email", "==", email).get();
   snapshot.forEach((doc) => {
-    if(latestDate == null || docID == ""){
+    if(latestDate == null || docID == "" && (doc.data.filename == filename)){
       latestDate = doc.date;
       docID = doc.id;
     } 
-    else if(doc.date > latestDate && (doc.data().filename == filename)){
-      console.log("filename:"+doc.data().filename );
+    else if(doc.date > latestDate && (doc.data.filename == filename)){
+      console.log("filename:"+doc.data.filename );
       latestDate = doc.date;
       docID = doc.id;
     }
