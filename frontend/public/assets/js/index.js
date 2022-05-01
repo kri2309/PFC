@@ -224,7 +224,15 @@ async function GetDocs() {
       <td style = " border: 1px solid #ddd;
       text-align: left; padding: 15px;">${oneData.email}</td>
       <td style = " border: 1px solid #ddd;
-      text-align: left; padding: 15px;">${oneData.completed}</td>
+      text-align: left; padding: 15px;  background-color: #f44336;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;">
+      <a href="${oneData.completed}" target="_blank">Converted File here</a>
+      
+      </td>
     </tr>
     </body>
     </table>
