@@ -208,7 +208,7 @@ async function GetDocs() {
     el.innerHTML = `
     <table>
     <thead style = "border: 1px solid;">
-    <tr> style = "border: 1px solid;"
+    <tr>
       <th scope="col">File Name</th>
       <th scope="col">Email</th>
       <th scope="col">Link</th>
