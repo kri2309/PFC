@@ -61,7 +61,7 @@ const callback2 = (err, messageId) => {
 
 async function publishMessage(payload) {
   const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
-  pubsub.topic("queue-sub").publish(dataBuffer, {}, callback2);
+  await pubsub.topic("queue-sub").publish(dataBuffer, {}, callback2);
 }
 
 let imageUpload = multer({
