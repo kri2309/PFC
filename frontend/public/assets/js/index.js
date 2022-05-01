@@ -216,7 +216,6 @@ async function GetDocs() {
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
       <td>${oneData.filename}</td>
       <td>${oneData.email}</td>
       <td>${oneData.completed}</td>
