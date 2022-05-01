@@ -115,14 +115,16 @@ async function loadGoogleLogin() {
       .then(() => {
         document.getElementById("admin-container").innerHTML = " ";
         document.getElementById("payments-container").innerHTML = " ";
-        document.getElementById("convert").innerHTML = `<button
-        type="button"
-        class="btn btn-dark"
-        onclick="selectFile()"
-        disabled
-      >
-        Convert
-      </button>`;
+        var button = document.getElementById("convert");
+        if(button!=null){
+          button.innerHTML = `<button
+          type="button"
+          class="btn btn-dark"
+          onclick="selectFile()"
+        >
+          Convert
+        </button>`;
+        }
         profile.style.display = "none";
         signInContainer.style.display = "inline";
         console.log("User signed out.");
