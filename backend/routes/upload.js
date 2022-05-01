@@ -18,7 +18,7 @@ var email = "";
 var ext = "";
 var url = "";
 var headers = null;
-const subscription = pubsub.subscription("queue-sub");
+
 var publishId = 0;
 
 const db = new Firestore({
@@ -30,6 +30,8 @@ const pubsub = new PubSub({
   projectId: "programmingforthecloud-340711",
   keyFilename: "./key.json",
 });
+
+const subscription = pubsub.subscription("queue-sub");
 
 const storage = new Storage({
   projectId: "programmingforthecloud-340711",
