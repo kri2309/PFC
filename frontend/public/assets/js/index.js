@@ -199,8 +199,19 @@ async function GetDocs() {
     "Access-Control-Allow-Origin": "*",
   };
   const response = await axios.post(url, headers);
-  console.log(response.data);
-
+  console.log(response.data.alldocs);
+  let allData = response.data.alldocs;
+  const table = document.getElementById("table-container");
+  for( var i = 0; i <allData.length; i++){
+    var oneData = allData[i];
+    const el = document.createElement("table-alldocs");
+    el.innerHTML = `
+    <p> ${oneData.filename}</p>
+    <p>${oneData.email}</p>
+    <p${oneData.date}></p>
+    <p>${oneData.completed}</p>
+    `
+  }
 };
 
 
