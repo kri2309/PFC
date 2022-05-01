@@ -17,8 +17,9 @@ clean.route("/").post( async (req,res) => {
 
   files.forEach(file => {
      //file.metadata.timeCreated
-   if(new Date(file.metadata.timeCreated) < Date.now() - (3600000)){
+   if(new Date(file.metadata.timeCreated) < Date.now() - (172800000)){
       console.log(file.name);
+      file.delete();
    }
  });
    
