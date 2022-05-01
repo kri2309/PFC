@@ -54,9 +54,9 @@ const authenticateReq = async (token) => {
       "payments-container"
     ).innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`;
 
-    var button = document.getElementById("convert").innerHTML;
+    var button = document.getElementById("convert");
     if(button!=null){
-      button = `<button
+      button.innerHTML = `<button
       type="button"
       class="btn btn-dark"
       onclick="selectFile()"
