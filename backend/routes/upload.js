@@ -80,7 +80,7 @@ async function publishMessage(payload) {
 }
 
 //Upload to the cloud storage
-async function UploadCloud() {
+async function UploadCloud(folder , file) {
   await storage.bucket(bucketname).upload(file.path, {
     destination: folder + file.originalname,
   });
@@ -96,7 +96,7 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
   validateToken(token).then(async function (r) {
     email = r.getPayload().email;
     if (req.file) {
-      UploadCloud()
+      UploadCloud("pending/", req.file)
         .catch(console.error)
         .then(async ([r]) =>{
           let base64Code = base64convert(file.path);
