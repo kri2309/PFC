@@ -101,6 +101,7 @@ async function loadGoogleLogin() {
   } else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
+    document.getElementById("admin-container").innerHTML = " ";
   }
 
   const signOut = () => {
