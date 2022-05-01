@@ -142,7 +142,7 @@ export async function GetLatestDoc(email, filename){
       latestDate = doc.date;
       docID = doc.id;
     } 
-    else if((doc.date > latestDate) && (doc.data().filename == filename)){
+    else if(doc.date > latestDate && (doc.data().filename == filename)){
       latestDate = doc.date;
       docID = doc.id;
     }
