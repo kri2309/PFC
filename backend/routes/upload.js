@@ -90,7 +90,7 @@ async function SubtoMSgs(req, res, email){
 
   let messageCount = 0;
   
-  const messageHandler = message => {
+  const messageHandler = async message => {
     console.log(`Received message ${message.id}:`);
     console.log(`Data: ${message.data}`);
     console.log(`tAttributes: ${message.attributes}`);
