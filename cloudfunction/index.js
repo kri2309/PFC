@@ -18,7 +18,7 @@ exports.helloPubSub = (event, context) => {
     `File ${jsonData.filename} with url ${jsonData.url} uploaded to cloud storage by ${jsonData.email} on ${jsonData.date}`
   );
   //Adding a document to the database
-  AddDocument("conversions", {
+  await AddDocument("conversions", {
     email: jsonData.email,
     filename: jsonData.filename,
     date: jsonData.date,
