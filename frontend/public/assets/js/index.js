@@ -200,6 +200,22 @@ async function GetDocs() {
   };
   const response = await axios.post(url, headers);
   console.log(response.data.alldocs);
+  var data = response.data.alldocs;
+  var myTable = document.createElement("table"),
+  row = myTable.insertRow(), cell;
+
+  var perrow = 2; // 2 CELLS PER ROW
+  data.forEach((value, i) => {
+  // ADD CELL
+  cell = row.insertCell();
+  cell.innerHTML = value;
+
+  var next = i + 1;
+  if (next%perrow==0 && next!=data.length) { row = myTable.insertRow(); }
+});
+
+// (D) ATTACH TABLE TO CONTAINER
+document.getElementById("table-container").appendChild(myTable);
   
 }
 
