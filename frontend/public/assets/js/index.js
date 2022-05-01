@@ -90,7 +90,7 @@ async function loadGoogleLogin() {
       const response = await axios.post(url, headers);
      
       console.log(response.data.admin);
-      if (response.data.admin == true) {
+      if (response.data.admin) {
         console.log(response.data.admin);
         document.getElementById("admin-container").innerHTML = (`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
       }else{
