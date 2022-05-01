@@ -110,6 +110,7 @@ export async function GetCredits(email){
   return userCredits;
 }
 
+//setting the cre
 export async function SetCredits(email, number){
   const getdoc = await GetUser(email);
   var Credits = Number(getdoc[0].credits)+ Number(number);

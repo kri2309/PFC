@@ -31,7 +31,7 @@ const pubsub = new PubSub({
   keyFilename: "./key.json",
 });
 
-const subscription = pubsub.subscription("queue-sub");
+const subscription = pubsub.subscription("queue-sub-sub");
 
 const storage = new Storage({
   projectId: "programmingforthecloud-340711",
