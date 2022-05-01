@@ -4,6 +4,13 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import { validateToken, UserInfo } from "./auth.js";
 
+
+const storage = new Storage({
+    projectId: "programmingforthecloud-340711",
+    keyFilename: "./key.json",
+  });
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 

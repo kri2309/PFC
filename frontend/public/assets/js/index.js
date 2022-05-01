@@ -12,7 +12,7 @@ let new10creditslabel = document.getElementById("10creditslabel");
 let new20creditslabel = document.getElementById("20creditslabel");
 let new30creditslabel = document.getElementById("30creditslabel");
 
-
+//checking if user is logged in before letting them upload
 const selectFile = () => {
   if (user_name) {
     uploadFile();
@@ -21,6 +21,7 @@ const selectFile = () => {
   }
 };
 
+//google auth
 const authenticateReq = async (token) => {
   const url = `https://kristinaborgolivier.me/auth?token=${token}`;
   const headers = {
@@ -30,6 +31,7 @@ const authenticateReq = async (token) => {
   const response = await axios.post(url, headers);
   const status = response.data.status;
 
+  //if logged in show log in content
   if (status == 200) {
     user_name = response.data.name;
     const name = response.data.name;
@@ -52,7 +54,7 @@ const authenticateReq = async (token) => {
 
     document.getElementById(
       "payments-container"
-    ).innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`;
+    ).innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Home</a>`;
 
     var button = document.getElementById("convert");
     if(button!=null){
@@ -72,13 +74,14 @@ const authenticateReq = async (token) => {
     return email;
   }
    else {
+     //if not logged in remove the content
     profile.style.display = "none";
     signInContainer.style.display = "inline";
     document.getElementById("admin-container").innerHTML = " ";
     return null;
   }
 };
-
+//google stuff to login
 async function loadGoogleLogin() {
   let session = document.cookie;
   if (session && session.includes("token")) {
@@ -106,7 +109,7 @@ async function loadGoogleLogin() {
     signInContainer.style.display = "inline";
     document.getElementById("admin-container").innerHTML = " ";
   }
-
+//when one signs out this happens 
   const signOut = () => {
     let auth2 = gapi.auth2.getAuthInstance();
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -165,7 +168,6 @@ async function loadGoogleLogin() {
           if (response.data.admin == true) {
             console.log(response.data.admin);
             document.getElementById("admin-container").innerHTML = (`<a class="nav-link active" aria-current="page" href="/admin">Admin Panel</a>`);
-            
 
           }
         }
@@ -179,6 +181,7 @@ async function loadGoogleLogin() {
   });
 }
 
+//to get the credits when the page loads or when the user buys 
 async function RunCredits() {
   console.log(email);
   const url = `/credits?email=${email}`;
@@ -191,6 +194,7 @@ async function RunCredits() {
   credits.innerHTML = "Credits:" + response.data.credits;
 }
 
+//gets all the conversions of this user 
 async function GetDocs() {
   console.log(email);
   const url = `/getalldocs?email=${email}`;
@@ -241,7 +245,7 @@ async function GetDocs() {
   }
 };
 
-
+//sees if user is an admin or nah
 async function GetAdminInfo() {
   const url = `/admin`;
   const headers = {
@@ -256,14 +260,17 @@ async function GetAdminInfo() {
   }
 }
 
+//adds the credits when one buys
 async function AddCredits(number) {
   const url = `setcredits?email=${email}&number=${number}`;
   const res = await axios.post(url);
   console.log("bought credits: "+number);
+  //calls this to refresh the credits
   RunCredits();
 
 }
 
+//from the admin table gets new prices
 async function SetNewCredits(){ 
   console.log("Setting new credits!");
   var new10 = new10credits.value;
@@ -276,10 +283,9 @@ async function SetNewCredits(){
     credits20:new20,
     credits30:new30
   });
-  
-
 }
 
+//actually changes the prices
 async function ChangeCreditPrices(){
 
   const url = `/getcreditprices`;
@@ -292,34 +298,3 @@ async function ChangeCreditPrices(){
   new20creditslabel.innerHTML =` 20 credits - €${NewPrices.credits20}`;
   new30creditslabel.innerHTML =` 30 credits - €${NewPrices.credits30}`;
 }
-/*
-async function getcredits(){
-  const email = await authenticateReq(googleUser.getAuthResponse().id_token);
-  console.log(email);
-
-  if(email != null){
-  const url = "/login?email="+email;
-  const headers = {
-    "Content-Type": "text/html",
-    "Access-Control-Allow-Origin": "*",
-  };
-  const response = await axios.post(url,headers);
-  if (response.data.result === "exists") {
-    console.log("Found email in database: " + email);
-  } else {
-    console.log("Account has been created for "+ email);
-  }
-  credits = document.getElementById("credits");
-  credits.innerHTML = "Credits: "+response.data.credits;
-  tempcred = response.data.credits;
-  sessionStorage.setItem("credits", response.data.credits);
-  console.log("SetItem in session: " + response.data.credits);
-  }
-}
-var tempcred = 0;
-$(document).ready(function(){
-  credits = document.getElementById("credits");
-  credits.innerHTML = "Credits: "+ sessionStorage.getItem("credits");
-  console.log("GetItem in session: " + sessionStorage.getItem("credits"));
-});
-*/

@@ -17,6 +17,7 @@ clean.route("/").post( async (req,res) => {
 
   files.forEach(file => {
      //file.metadata.timeCreated
+     //2 days old gets deleted
    if(new Date(file.metadata.timeCreated) < Date.now() - (172800000)){
       console.log("deleted : "+file.name);
       file.delete();

@@ -27,23 +27,14 @@ auth.route("/").post((req, res) => {
     .then((ticket) => {
       if (ticket) {
         const payload = ticket.getPayload();
-       // checkLogin(payload.email, 10, false).then((userData) =>{
-        //if(userData){
           res.send({
             status: "200",
             name: payload.name,
-            //credits: userData.credits,
-            //admin: userData.admin,
             email: payload.email,
             picture: payload.picture,
             token: token,
             expiry: payload.exp,
-          });
-        //}
-
-      //  } )
-        
-        //console.log(`${payload.name} has logged in.`); 
+          }); 
       } else {
         res.send({ status: "401" });
       }
@@ -53,7 +44,7 @@ auth.route("/").post((req, res) => {
     });;
 });
 
-//useless
+//useless but am too scared to remove :) 
 async function checkLogin(email,credits,admin){
 let data = await GetUser(email)
 if (data === undefined){
