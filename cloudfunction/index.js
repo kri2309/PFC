@@ -82,7 +82,7 @@ const FileToAPI = async (filename, convertedFile) => {
   }
   console.log("sent to api");
   const response = await axios.post(url, headers);
-  console.log(response);
+ // console.log(response);
 
   return response.data.pdf_base64;
 };
@@ -112,8 +112,8 @@ const PostToCompletedBucket = async (newfile, NewName) => {
 };
 
 const PostToConversions = async (FinalLink) => {
-  const doc = db.collection("conversions").doc(docref);
-  const res = await doc.update({
+  //const doc = db.collection("conversions").doc(docref);
+  const res = await docref.update({
     completed: `${FinalLink}`,
   });
   console.log("File converted successfully!");
