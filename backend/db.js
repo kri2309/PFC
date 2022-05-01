@@ -82,6 +82,15 @@ export async function CreateUser(email) {
     admin : false
   });
 }
+export async function AllDocs(email){
+  const docRef = db.collection("conversions");
+  const snapshot = await docRef.where("email", "==", email).get();
+  let data = [];
+  snapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+  return data;
+}
 
 export async function GetUser(email) {
   const docRef = db.collection("userData");

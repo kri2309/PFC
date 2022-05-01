@@ -99,9 +99,15 @@ app.post("/credits", (req, res) => {
 });
 
 app.post("/setrediscredits", (req, res) => {
-  console.log("Hiii: " + req.body);
   SetNewCreditPrices(req.body).then((methodResult)=>{
     res.send({result: "newCreditPrices", reason: "new Credits here!", credits: JSON.stringify(methodResult)});
+  });
+});
+
+
+app.post("/getalldocs", (req, res) => {
+  AllDocs(req.query.email).then((methodResult)=>{
+    res.send({alldocs : methodResult});
   });
 });
 

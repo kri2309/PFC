@@ -191,6 +191,18 @@ async function RunCredits() {
   credits.innerHTML = "Credits:" + response.data.credits;
 }
 
+async function GetDocs() {
+  console.log(email);
+  const url = `/getalldocs?email=${email}`;
+  const headers = {
+    "Content-Type": "text/html",
+    "Access-Control-Allow-Origin": "*",
+  };
+  const response = await axios.post(url, headers);
+  console.log(response.data.alldocs);
+  
+}
+
 async function GetAdminInfo() {
   const url = `/admin`;
   const headers = {
