@@ -204,8 +204,8 @@ async function GetDocs() {
   var myTable = document.createElement("table"),
   row = myTable.insertRow(), cell;
 
-  var perrow = 2; // 2 CELLS PER ROW
-  data.forEach((value, i) => {
+  var perrow = 5; // 5 CELLS PER ROW
+  data.forEach((value) => {
     console.log(value);
   // ADD CELL
   cell = row.insertCell();
