@@ -11,7 +11,7 @@ const AddDocument = async (collection, data) => {
 };
 
 //entry point of our application
-exports.helloPubSub = (event, context) => {
+exports.helloPubSub = async function (event, context)  {
   const data = Buffer.from(event.data, "base64").toString();
   const jsonData = JSON.parse(data);
   console.log(
