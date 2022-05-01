@@ -280,6 +280,18 @@ async function SetNewCredits(){
 
 }
 
+async function ChangeCreditPrices(){
+
+  const url = `/getcreditprices`;
+  const response = await axios.post(url);
+
+  var NewPrices = JSON.parse(response.data.creditPrices);
+  NewPrices = JSON.parse(NewPrices);
+
+  new10creditslabel.innerHTML =` 10 credits - €${NewPrices.credits10}`;
+  new20creditslabel.innerHTML =` 20 credits - €${NewPrices.credits20}`;
+  new30creditslabel.innerHTML =` 30 credits - €${NewPrices.credits30}`;
+}
 /*
 async function getcredits(){
   const email = await authenticateReq(googleUser.getAuthResponse().id_token);

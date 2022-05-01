@@ -111,6 +111,11 @@ app.post("/getalldocs", (req, res) => {
   });
 });
 
+app.post("/getcreditprices", (req, res) => {
+  GetNewCredit().then((methodResult)=>{
+    res.send({result: "newCreditPricesUpdated", reason: "new Credits updated!", creditPrices: JSON.stringify(methodResult)});
+  });
+});
 
 
 app.post("/setcredits", (req, res) => {
