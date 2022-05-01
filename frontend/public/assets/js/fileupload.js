@@ -10,5 +10,8 @@ const uploadFile = async () => {
     formData.append("image", fileUpload);
     const response = await axios.post(url, formData, headers);
     console.log(response);
+  }else {
+    alert("Error: File Type not supported!");
+
   }
 };
