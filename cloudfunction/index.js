@@ -1,8 +1,8 @@
-const {Firestore} = require("@google-cloud/firestore");
-const {Storage} = require("@google-cloud/storage");
+const { Firestore } = require("@google-cloud/firestore");
+const { Storage } = require("@google-cloud/storage");
 const fs = require("fs");
 const axios = require("axios");
-const  path = require ("path");
+const path = require("path");
 
 var email = "";
 var ext = "";
@@ -33,7 +33,7 @@ exports.helloPubSub = async function (event, context) {
   const data = Buffer.from(event.data, "base64").toString();
   const jsonData = JSON.parse(data);
   console.log(
-    `File ${jsonData.filename} with url ${jsonData.url} uploaded to cloud storage by ${jsonData.email} on ${jsonData.date}`
+    `File ${jsonData.filename} with url ${jsonData.url} uploaded to cloud storage by ${jsonData.email} on ${jsonData.date} with base64 as ${jsonData.convertedFile} `
   );
   //Adding a document to the database
   await AddDocument("conversions", {
@@ -42,16 +42,20 @@ exports.helloPubSub = async function (event, context) {
     date: jsonData.date,
     pending: jsonData.url,
     completed: "",
-  });
-  
-  FileToAPI(jsonData.filename, jsonData.convertedFile).then((response) => {
-    NewPDFFile(jsonData.filename, response).then((r) => {
-      PostToCompletedBucket(r, NewName).then((link) => {
-        PostToConversions(link);
+  }).then(() => {
+    console.log("AddDocument done");
+    FileToAPI(jsonData.filename, jsonData.convertedFile).then((response) => {
+      console.log("FileToAPI done");
+      NewPDFFile(jsonData.filename, response).then((r) => {
+        console.log("NewPDFFile done");
+        PostToCompletedBucket(r, NewName).then((link) => {
+          console.log("PostToCompletedBucket done");
+          PostToConversions(link);
+          console.log("PostToConversions done");
+        });
       });
     });
   });
-  
 };
 
 const FileToAPI = async (filename, convertedFile) => {
@@ -80,7 +84,7 @@ const FileToAPI = async (filename, convertedFile) => {
   }
   console.log("sent to api");
   const response = await axios.post(url, headers);
-  console.log("got ans from api");
+  console.log(response);
 
   return response.data.pdf_base64;
 };
