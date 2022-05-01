@@ -176,6 +176,7 @@ async function SubtoMSgs(req, res, email){
             NewName;
           console.log("Getting last doc of email: " + email);
           //posting in conversions 
+          console.log(fileName);
           const lastDocRef = await GetLatestDoc(email,fileName);
           console.log("lastDocRef id " + lastDocRef);
           const doc = db.collection("conversions").doc(lastDocRef);
