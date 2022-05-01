@@ -206,6 +206,7 @@ async function GetDocs() {
 
   var perrow = 2; // 2 CELLS PER ROW
   data.forEach((value, i) => {
+    console.log(value);
   // ADD CELL
   cell = row.insertCell();
   cell.innerHTML = value;
