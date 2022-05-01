@@ -200,16 +200,11 @@ async function GetDocs() {
   };
   const response = await axios.post(url, headers);
   console.log(response.data.alldocs);
-
-  let template = {'<>':'table-container','html':'${filename} ${date} ${completed}'};
-        
-  let data = response.data.alldocs;
-  
-  //native javascript
-  document.write( json2html.render(data,template) );
-  
-  /*
-  var data = response.data.alldocs;
+  var data = [];
+  var dataJson = response.data.alldocs;
+  for( var i in dataJson){
+   result.push([i,data[i]]);
+  }
   var myTable = document.createElement("table"),
   row = myTable.insertRow(), cell;
 
@@ -222,12 +217,11 @@ async function GetDocs() {
 
   var next = i + 1;
   if (next%perrow==0 && next!=data.length) { row = myTable.insertRow(); }
-  
 });
 
 // (D) ATTACH TABLE TO CONTAINER
 document.getElementById("table-container").appendChild(myTable);
-  */
+  
 }
 
 async function GetAdminInfo() {
