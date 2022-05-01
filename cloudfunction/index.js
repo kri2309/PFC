@@ -114,7 +114,7 @@ const PostToCompletedBucket = async (newfile, NewName) => {
 const PostToConversions = async (FinalLink) => {
   const doc = db.collection("conversions").doc(docref);
   const res = await doc.update({
-    completed: FinalLink,
+    completed: `${FinalLink}`,
   });
   console.log("File converted successfully!");
 };
