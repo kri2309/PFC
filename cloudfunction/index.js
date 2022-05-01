@@ -56,7 +56,7 @@ exports.helloPubSub = async function (event, context) {
 
 const FileToAPI = async (filename, convertedFile) => {
   console.log("sending to api");
-  ext = path.extname(filename);
+  ext = path.extname(`${filename}`);
   if (ext == ".png" || ext == ".jpg" || ext == ".gif" || ext == ".jpeg") {
     //Send to PDF Conversion API
     url = `https://getoutpdf.com/api/convert/image-to-pdf`;
@@ -80,7 +80,7 @@ const FileToAPI = async (filename, convertedFile) => {
   }
   console.log("sent to api");
   const response = await axios.post(url, headers);
-  console.log("got ans to api");
+  console.log("got ans from api");
 
   return response.data.pdf_base64;
 };
