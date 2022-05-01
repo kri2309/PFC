@@ -81,7 +81,7 @@ async function publishMessage(payload) {
 
 //Upload to the cloud storage
 async function UploadCloud(folder , file) {
-  await storage.bucket(bucketname).upload(file.path, {
+  return await storage.bucket(bucketname).upload(file.path, {
     destination: folder + file.originalname,
   });
   console.log(`${file.path} uploaded to ${bucketname}`);
