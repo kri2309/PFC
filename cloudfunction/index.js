@@ -70,9 +70,7 @@ const FileToAPI = async (filename, convertedFile) => {
         "ed4129c1077bfcfbe13885c696190a477b0ac821e09371b7076b2454cdb35c83",
       image: `${convertedFile}`,
     };
-  }
-
-  if (ext !== ".doc" || ext !== ".docx") {
+  } else if (ext == ".doc" || ext == ".docx") {
     //Send to PDF Conversion API
     url = `https://getoutpdf.com/api/convert/document-to-pdf`;
     headers = {
