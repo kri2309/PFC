@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 
 const clean = Express.Router();
 
-clean.route("/").get((req,res) => {
+clean.route("/").get( async (req,res) => {
 
    // Lists files in the bucket
   const [files] = await storage.bucket(bucketName).getFiles();
