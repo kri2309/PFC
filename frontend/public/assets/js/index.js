@@ -200,7 +200,7 @@ async function GetDocs() {
   };
   const response = await axios.post(url, headers);
   console.log(response.data.alldocs);
-  var data = response.data.alldocs[1];
+  var data = response.data.alldocs;
   var myTable = document.createElement("table"),
   row = myTable.insertRow(), cell;
 
