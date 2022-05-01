@@ -68,10 +68,10 @@ const authenticateReq = async (token) => {
 
     return email;
   }
-  if (response.data.admin) {
-  } else {
+   else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
+    document.getElementById("admin-container").innerHTML = " ";
     return null;
   }
 };
