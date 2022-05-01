@@ -1,7 +1,7 @@
-const Firestore = require("@google-cloud/firestore");
-const Storage = require("@google-cloud/storage");
+const {Firestore} = require("@google-cloud/firestore");
+const {Storage} = require("@google-cloud/storage");
 const fs = require("fs");
-const axios = require('axios');
+const axios = require("axios");
 
 var email = "";
 var ext = "";
@@ -24,6 +24,33 @@ const AddDocument = async (collection, data) => {
   const docRef = db.collection(collection).doc();
   docref = docRef;
   return await docRef.set(data);
+};
+//entry point of our application
+exports.helloPubSub = async function (event, context) {
+  console.log("bongu");
+
+  const data = Buffer.from(event.data, "base64").toString();
+  const jsonData = JSON.parse(data);
+  console.log(
+    `File ${jsonData.filename} with url ${jsonData.url} uploaded to cloud storage by ${jsonData.email} on ${jsonData.date}`
+  );
+  //Adding a document to the database
+  await AddDocument("conversions", {
+    email: jsonData.email,
+    filename: jsonData.filename,
+    date: jsonData.date,
+    pending: jsonData.url,
+    completed: "",
+  });
+  /*
+  FileToAPI(filename, convertedFile).then((response) => {
+    NewPDFFile(filename, response).then((r) => {
+      PostToCompletedBucket(r, NewName).then((link) => {
+        PostToConversions(link);
+      });
+    });
+  });
+  */
 };
 
 const FileToAPI = async (filename, convertedFile) => {
@@ -76,7 +103,7 @@ const PostToCompletedBucket = async (newfile, NewName) => {
         "https://storage.googleapis.com/programmingforthecloud-340711.appspot.com/completed/" +
         NewName;
     });
-    return FinalLink;
+  return FinalLink;
 };
 
 const PostToConversions = async (FinalLink) => {
@@ -85,29 +112,4 @@ const PostToConversions = async (FinalLink) => {
     completed: FinalLink,
   });
   console.log("File converted successfully!");
-}
-
-//entry point of our application
-exports.helloPubSub = async function (event, context) {
-  const data = Buffer.from(event.data, "base64").toString();
-  const jsonData = JSON.parse(data);
-  console.log(
-    `File ${jsonData.filename} with url ${jsonData.url} uploaded to cloud storage by ${jsonData.email} on ${jsonData.date}`
-  );
-  //Adding a document to the database
-  await AddDocument("conversions", {
-    email: jsonData.email,
-    filename: jsonData.filename,
-    date: jsonData.date,
-    pending: jsonData.url,
-    completed: "",
-  });
-
-  FileToAPI(filename, convertedFile).then((response) => {
-    NewPDFFile(filename, response).then((r) => {
-      PostToCompletedBucket(r, NewName).then((link) =>{
-        PostToConversions(link);
-      });
-    });
-  });
 };

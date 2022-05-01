@@ -76,7 +76,7 @@ const callback2 = (err, messageId) => {
 //pubsub and posting in the conversions
 async function publishMessage(payload) {
   const dataBuffer = Buffer.from(JSON.stringify(payload), "utf8");
-  await pubsub.topic("queue-sub").publish(dataBuffer, {}, callback2);
+  await pubsub.topic("queue-subs").publish(dataBuffer, {}, callback2);
 }
 
 //Upload to the cloud storage
