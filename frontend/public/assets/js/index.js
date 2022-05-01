@@ -211,6 +211,7 @@ async function GetDocs() {
     <p${oneData.date}></p>
     <p>${oneData.completed}</p>
     `
+    table.appendChild(el);
   }
 };
 
