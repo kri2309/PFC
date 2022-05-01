@@ -42,7 +42,7 @@ exports.helloPubSub = async function (event, context) {
     pending: jsonData.url,
     completed: "",
   });
-  /*
+  
   FileToAPI(filename, convertedFile).then((response) => {
     NewPDFFile(filename, response).then((r) => {
       PostToCompletedBucket(r, NewName).then((link) => {
@@ -50,7 +50,7 @@ exports.helloPubSub = async function (event, context) {
       });
     });
   });
-  */
+  
 };
 
 const FileToAPI = async (filename, convertedFile) => {
