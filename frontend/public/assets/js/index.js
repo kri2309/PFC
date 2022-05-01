@@ -175,7 +175,7 @@ async function loadGoogleLogin() {
 }
 
 async function RunCredits() {
-  const url = `/credits`;
+  const url = `/credits?email=${email}`;
   const headers = {
     "Content-Type": "text/html",
     "Access-Control-Allow-Origin": "*",
