@@ -54,13 +54,16 @@ const authenticateReq = async (token) => {
       "payments-container"
     ).innerHTML = `<a class="nav-link active" aria-current="page" href="/payments?token=${token}">Buy Credits</a>`;
 
-    document.getElementById("convert").innerHTML = `<button
-    type="button"
-    class="btn btn-dark"
-    onclick="selectFile()"
-  >
-    Convert
-  </button>`;
+    var button = document.getElementById("convert").innerHTML;
+    if(button!=null){
+      button = `<button
+      type="button"
+      class="btn btn-dark"
+      onclick="selectFile()"
+    >
+      Convert
+    </button>`;
+    }
 
     document.getElementById("picture").src = picture;
     document.cookie = `token=${token};expires=${expiry}`;
