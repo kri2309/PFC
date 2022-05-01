@@ -92,7 +92,8 @@ app.get("/", (req, res) => {
 });
 
 app.post("/credits", (req, res) => {
-  GetCredits().then((methodResult)=>{
+  console.log(req.query.email);
+  GetCredits(req.query.email).then((methodResult)=>{
     res.send({result: "CreditsAcquired", reason: "Credits here!", credits: JSON.stringify(methodResult)});
   });
 });
