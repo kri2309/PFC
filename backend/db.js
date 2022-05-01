@@ -141,7 +141,7 @@ export async function GetLatestDoc(email, filename){
   
   const snapshot = await docRef.where("email", "==", email).get();
   snapshot.forEach((doc) => {
-    if(latestDate == null || docID == ""){
+    if(latestDate == null){
       latestDate = doc.date;
       docID = doc.id;
     } 
