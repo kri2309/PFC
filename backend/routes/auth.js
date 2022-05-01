@@ -24,21 +24,21 @@ auth.route("/").post((req, res) => {
     .then((ticket) => {
       if (ticket) {
         const payload = ticket.getPayload();
-        checkLogin(payload.email, 10, false).then((userData) =>{
-        if(userData){
+       // checkLogin(payload.email, 10, false).then((userData) =>{
+        //if(userData){
           res.send({
             status: "200",
             name: payload.name,
-            credits: userData.credits,
-            admin: userData.admin,
+            //credits: userData.credits,
+            //admin: userData.admin,
             email: payload.email,
             picture: payload.picture,
             token: token,
             expiry: payload.exp,
           });
-        }
+        //}
 
-        } )
+      //  } )
         
         //console.log(`${payload.name} has logged in.`); 
       } else {
