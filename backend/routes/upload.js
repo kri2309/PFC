@@ -101,7 +101,7 @@ async function SubtoMSgs(req, res, email){
     // Ack the messae
     message.ack();
 
-    if(publishId == messageId){
+    if(publishId == message.id){
       ext = path.extname(req.file.originalname);
       if (ext == ".png" || ext == ".jpg" || ext == ".gif" || ext == ".jpeg") {
         //Convert to base64
