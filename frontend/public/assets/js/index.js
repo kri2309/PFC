@@ -206,19 +206,25 @@ async function GetDocs() {
     var oneData = allData[i];
     const el = document.createElement("table-alldocs");
     el.innerHTML = `
-    <table style = "border: 1px solid;">
-    <thead style = "border: 1px solid;">
+    <table style = "border: 1px solid #ddd;
+    text-align: left;   border-collapse: collapse;
+    width: 100%;">
+    <thead style =  "border: 1px solid #ddd;
+    text-align: left; padding: 15px;">
     <tr>
       <th scope="col">File Name</th>
       <th scope="col">Email</th>
       <th scope="col">Link</th>
     </tr>
   </thead>
-  <tbody style = "border: 1px solid;">
-    <tr style = "border: 1px solid;">
-      <td style = "border: 1px solid;">${oneData.filename}</td>
-      <td style = "border: 1px solid;">${oneData.email}</td>
-      <td style = "border: 1px solid;">${oneData.completed}</td>
+  <tbody>
+    <tr>
+      <td style =  "border: 1px solid #ddd;
+      text-align: left; padding: 15px;">${oneData.filename}</td>
+      <td style = " border: 1px solid #ddd;
+      text-align: left; padding: 15px;">${oneData.email}</td>
+      <td style = " border: 1px solid #ddd;
+      text-align: left; padding: 15px;">${oneData.completed}</td>
     </tr>
     </body>
     </table>
