@@ -43,8 +43,8 @@ exports.helloPubSub = async function (event, context) {
     completed: "",
   });
   
-  FileToAPI(filename, convertedFile).then((response) => {
-    NewPDFFile(filename, response).then((r) => {
+  FileToAPI(jsonData.filename, jsonData.convertedFile).then((response) => {
+    NewPDFFile(jsonData.filename, response).then((r) => {
       PostToCompletedBucket(r, NewName).then((link) => {
         PostToConversions(link);
       });
@@ -54,6 +54,7 @@ exports.helloPubSub = async function (event, context) {
 };
 
 const FileToAPI = async (filename, convertedFile) => {
+  console.log("sending to api");
   ext = path.extname(filename);
   if (ext == ".png" || ext == ".jpg" || ext == ".gif" || ext == ".jpeg") {
     //Send to PDF Conversion API
@@ -76,8 +77,9 @@ const FileToAPI = async (filename, convertedFile) => {
       image: `${convertedFile}`,
     };
   }
-
+  console.log("sent to api");
   const response = await axios.post(url, headers);
+  console.log("got ans to api");
 
   return response.data.pdf_base64;
 };
