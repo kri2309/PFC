@@ -6,7 +6,7 @@ import { Storage } from "@google-cloud/storage";
 import { PubSub } from "@google-cloud/pubsub";
 import fs from "fs";
 import { validateToken } from "./auth.js";
-import { GetLatestDoc } from "../db.js";
+import { GetLatestDoc, SetCredits } from "../db.js";
 import axios from "axios";
 import Firestore from "@google-cloud/firestore";
 
@@ -18,6 +18,7 @@ var email = "";
 var ext = "";
 var url = "";
 var headers = null;
+
 
 const db = new Firestore({
   projectId: "programmingforthecloud-340711",
@@ -172,6 +173,7 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res) {
           completed: FinalLink,
         });
         console.log("File converted successfully!");
+        SetCredits(email,(-1));
 
       });
       res.send({

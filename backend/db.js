@@ -96,7 +96,12 @@ export async function GetUser(email) {
   return data;
 }
 
-export async function GetCredits(){
+export async function GetCredits(email){
+  const docRef = db.collection("userData");
+  const snapshot = await docRef.where("email", "==", email).get();
+  snapshot.forEach((doc) => {
+    userCredits = doc.data().credits;
+  });
   return userCredits;
 }
 
