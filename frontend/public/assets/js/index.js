@@ -206,10 +206,23 @@ async function GetDocs() {
     var oneData = allData[i];
     const el = document.createElement("table-alldocs");
     el.innerHTML = `
-    <p> ${oneData.filename}</p>
-    <p>${oneData.email}</p>
-    <p${oneData.date}></p>
-    <p>${oneData.completed}</p>
+    <table>
+    <thead>
+    <tr>
+      <th scope="col">File Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>${oneData.filename}</td>
+      <td>${oneData.email}</td>
+      <td>${oneData.completed}</td>
+    </tr>
+    </body>
+    </table>
     `
     table.appendChild(el);
   }
