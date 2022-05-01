@@ -4,7 +4,7 @@ import https from "https";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
-import { GetUser, CreateUser, GetCredits, GetAdminInfo, SetCredits, SetNewCreditPrices, AllDocs, GetNewCredit} from "./db.js";
+import { GetUser, CreateUser, GetCredits, GetAdminInfo, SetCredits, SetNewCreditPrices, AllDocs, GetNewCreditPrices} from "./db.js";
 import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import admin from "./routes/admin.js";
@@ -112,7 +112,7 @@ app.post("/getalldocs", (req, res) => {
 });
 
 app.post("/getcreditprices", (req, res) => {
-  GetNewCredit().then((methodResult)=>{
+  GetNewCreditPrices().then((methodResult)=>{
     res.send({result: "newCreditPricesUpdated", reason: "new Credits updated!", creditPrices: JSON.stringify(methodResult)});
   });
 });
