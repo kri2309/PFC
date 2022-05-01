@@ -9,7 +9,7 @@ const storage = new Storage({
    keyFilename: "./key.json",
  });
 
-clean.route("/").get( async (req,res) => {
+clean.route("/").post( async (req,res) => {
 
    // Lists files in the bucket
   const [files] = await storage.bucket(bucketname).getFiles();
