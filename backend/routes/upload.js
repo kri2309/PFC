@@ -157,7 +157,7 @@ async function SubtoMSgs(req, res, email){
       //save response from API
       const newfile = new Buffer.from(response_64, "base64");
       console.log(newfile);
-
+      var fileName = req.file.originalname;
       //change the file name
       const NewName = req.file.originalname.replace(
         path.extname(req.file.originalname),
@@ -176,7 +176,7 @@ async function SubtoMSgs(req, res, email){
             NewName;
           console.log("Getting last doc of email: " + email);
           //posting in conversions 
-          const lastDocRef = await GetLatestDoc(email);
+          const lastDocRef = await GetLatestDoc(email,fileName);
           const doc = db.collection("conversions").doc(lastDocRef);
           console.log("lastDocRef id " + lastDocRef);
           const res = await doc.update({

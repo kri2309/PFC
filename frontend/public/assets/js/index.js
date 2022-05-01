@@ -219,7 +219,6 @@ async function GetDocs() {
   if (next%perrow==0 && next!=data.length) { row = myTable.insertRow(); }
 });
 
-// (D) ATTACH TABLE TO CONTAINER
 document.getElementById("table-container").appendChild(myTable);
   
 }

@@ -134,7 +134,7 @@ export async function GetAdminInfo(){
   return adminInfo;
 }
 
-export async function GetLatestDoc(email){
+export async function GetLatestDoc(email, filename){
   const docRef = db.collection("conversions");
   const snapshot = await docRef.where("email", "==", email).get();
   snapshot.forEach((doc) => {
@@ -142,7 +142,7 @@ export async function GetLatestDoc(email){
       latestDate = doc.date;
       docID = doc.id;
     } 
-    else if(doc.date > latestDate){
+    else if((doc.date > latestDate) && (doc.data().filename == filename)){
       latestDate = doc.date;
       docID = doc.id;
     }
